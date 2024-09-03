@@ -1,8 +1,42 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import MasterWrapper from "@/lib/config/masterwrapper";
+import localFont from 'next/font/local'
+// import "../public/"
+const paps = localFont({
+  src: [
+    {
+      path: "../../public/fonts/papsmedium.otf",
+      weight: "500",
+    },
+    {
+      path: "../../public/fonts/papslight.otf",
+      weight: "200",
+    },
+    {
+      path: "../../public/fonts/papsbold.otf",
+      weight: "700",
+    },
+  ],
+  variable: "--font-paps",
+});
+const fragment = localFont({
+  src: [
+    {
+      path: "../../public/fonts/fragmentmedium.otf",
+      weight: "500",
+    },
+    {
+      path: "../../public/fonts/fragmentlight.otf",
+      weight: "200",
+    },
+    {
+      path: "../../public/fonts/fragmentbold.otf",
+      weight: "700",
+    },
+  ],
+  variable: "--font-fragment",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +50,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+           <body className={`${paps.variable} ${fragment.variable}`}>
+        <MasterWrapper>
+          {children}
+        </MasterWrapper>
+       </body>
     </html>
   );
 }
