@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+enum Status {
+  ACTIVE
+  INACTIVE
+  ADMINREMOVED
+}
+model User {
+  walletAddress String @id
+  name          String?
+  bio           String?
+  image         String?
+  investments   Investment[]
+  pitches       Pitch[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Pitch {
+  id                     String   @default(uuid()) @id
+  userId                 String
+  user                   User     @relation(fields: [userId], references: [walletAddress])
+  investmentId           String
+  investment             Investment @relation(fields: [investmentId], references: [id])
+  title                  String
+  description            String
+  deadline               DateTime
+  initialInvestment      Int
+  profitAmountEstimation Int
+  isNative               Boolean
+  investmentTokenAddress String
+  profitPercentageAmount Int
+  isExecuted             Boolean
+  voteFor                Int
+  voteAgainst            Int
+  totalVoters            Int
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+}
+
+model Investment {
+  id                     String   @default(uuid()) @id
+  userId                 String
+  user                   User     @relation(fields: [userId], references: [walletAddress])
+  accounts               String[] @default([])
+  partnerInvestors       String[]
+  stake                  Int
+  amount                 Int
+  pitches                Pitch[]
+  chainId                Int[] @default([])
+  status                 Status
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 type Props = {};
 
@@ -42,9 +43,11 @@ const InvestorCard = (props: Props) => {
           blanditiis...{" "}
         </h3>
       </div>
+      <Link href={'/dapp/hello'} className="w-full flex justify-center">
       <Button className=" w-10/12 mt-3" variant={"secondary"}>
         pitch now
       </Button>
+      </Link>
     </div>
   );
 };
