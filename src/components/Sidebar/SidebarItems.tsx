@@ -1,22 +1,20 @@
-import { Rabbit } from "lucide-react";
+import { AppleIcon, CoffeeIcon, MessagesSquare, Rabbit, Sparkles } from "lucide-react";
 
 export const marketPlace = [
   {
-    redirectUrl: "/market/direct",
+    redirectUrl: "/dapp",
     title: "Dapps Market",
-    shortTitle: "Direct",
-    icon: <Rabbit />,
+    shortTitle: "Dapps",
+    icon: <AppleIcon />,
     comingSoon: false,
   },
   {
     redirectUrl: "/market/cross",
     title: "Explore Investors",
     shortTitle: "Investors",
-    icon: <Rabbit />,
+    icon: <CoffeeIcon />,
     comingSoon: false,
   },
-
-
 ];
 
 export const trades = [
@@ -24,7 +22,7 @@ export const trades = [
     redirectUrl: "/market/points",
     title: "deTalks",
     shortTitle: "deTalks",
-    icon: <Rabbit />,
+    icon: <MessagesSquare />,
     comingSoon: false,
   },
   {
@@ -41,7 +39,7 @@ export const onDemand = [
     redirectUrl: "#",
     title: "Dashboard",
     shortTitle: "Dash Board",
-    icon: <Rabbit />,
+    icon: <Sparkles />,
     comingSoon: false,
   },
 ];

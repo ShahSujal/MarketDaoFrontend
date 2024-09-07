@@ -28,7 +28,7 @@ export default function SidebarSection({ section }: TSidebarSection) {
       href={redirectUrl}
     >
       {icon}
-      <h6 className="text-center text-base leading-none">
+      <h6 className="text-center text-sm leading-none">
         {shortTitle ? shortTitle : ""}
       </h6>
       {comingSoon && (

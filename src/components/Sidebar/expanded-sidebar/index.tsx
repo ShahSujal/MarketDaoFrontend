@@ -7,7 +7,6 @@ import {
 } from "@/components/Sidebar/SidebarItems";
 import { Separator } from "@/components/ui/separator";
 import SidebarSection from "@/components/Sidebar/expanded-sidebar/SidebarSection";
-// import { GotoArrowCircle, OTCLayerIcon, RewardsGift } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { AlignVerticalSpaceBetweenIcon, Rabbit } from "lucide-react";
@@ -45,13 +44,12 @@ export default function ExpandedSidebar() {
         </div>
       </ScrollArea>
       <Link
-        href={"/rewards"}
+        href={"/investment/create"}
         className="mx-auto flex w-11/12 justify-center px-2.5 "
       >
         <Button className="relative h-16 w-full gap-1 rounded-[0.8rem] bg-[#CAC1FF] text-lg font-medium text-black hover:bg-[#CAC1FF]/80">
           <AlignVerticalSpaceBetweenIcon />
-          Rewards
-          {/* <GotoArrowCircle className="absolute -top-[35%]" /> */}
+          Launch Dapp
         </Button>
       </Link>
     </div>

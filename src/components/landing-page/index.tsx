@@ -5,11 +5,11 @@ type Props = {};
 
 const LandingPage = (props: Props) => {
   return (
-    <main className="w-full relative min-h-[300vh] flex flex-col bg-black">
+    <main className="w-full relative min-h-[300vh] bg-[#040015] flex flex-col ">
 
 
 
-      <section className="w-full h-screen sticky top-0 bg-black">
+      <section className="w-full h-screen sticky top-0 ">
         <Spline
           scene={process.env.NEXT_PUBLIC_SPLINE_CUBES!}
           className="w-full h-full"
@@ -32,6 +32,8 @@ const LandingPage = (props: Props) => {
 
       <div className=" w-full h-screen"></div>
       <Popupcards />
+
+      
     </main>
   );
 };

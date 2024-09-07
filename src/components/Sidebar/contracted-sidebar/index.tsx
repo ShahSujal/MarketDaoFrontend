@@ -21,7 +21,7 @@ export default function ContractedSidebar() {
         <AlignHorizontalDistributeCenterIcon />
         
       </div>
-      <ScrollArea className="h-[calc(100vh-15rem)] px-2">
+      <ScrollArea className="h-[calc(100vh-8rem)] px-2">
         <div className="flex w-full flex-col items-center text-white">
           <div className="w-full text-center text-[0.813rem]">MARKET PLACE</div>
           <SidebarSection section={marketPlace} />
@@ -39,9 +39,10 @@ export default function ContractedSidebar() {
           <Separator className="w-11/12 border-white" />
         </div>
       </ScrollArea>
-      <Link href={"/rewards"} className="mx-auto flex justify-center py-8">
-        <Button className="relative h-20 w-11/12 rounded-[0.8rem] bg-[#CAC1FF] text-base font-medium text-black hover:bg-[#CAC1FF]/80">
+      <Link href={"/rewards"} className="mx-auto flex justify-center ">
+        <Button className="relative h-10 w-11/12 rounded-[0.8rem] bg-[#CAC1FF] text-base font-medium text-black hover:bg-[#CAC1FF]/80">
           <Rabbit className="-ml-1" />
+         
           {/* <GotoArrowCircle className="absolute -top-[35%]" /> */}
         </Button>
       </Link>

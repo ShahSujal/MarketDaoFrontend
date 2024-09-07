@@ -34,9 +34,9 @@ const PopupCard: React.FC<PopupCardProps> = ({ title, description, direction, co
     }}
     initial="hidden"
     animate={control}
-    transition={{ duration: 0.5 }}
+    transition={{ delay: 1.5, duration: 1 }}
     style={{ zIndex: 10 }}
-    className={`w-[350px] h-[150px] flex justify-center items-center flex-col bg-[#48484821] rounded-lg text-center p-3 backdrop-blur-md border-2 border-[#2c2c2c] ${direction > 0 ? 'ml-96' : 'mr-96'}`}
+    className={`w-[350px] h-[150px] flex justify-center items-center flex-col  rounded-lg text-center p-3 backdrop-blur-md border-2 border-[#2c2c2c] ${direction > 0 ? 'ml-96' : 'mr-96'}`}
     ref={refElement}
   >
     <h1 className='text-[#d3d1d1] font-paps font-medium'>{title}</h1>

@@ -7,7 +7,7 @@ type Props = {};
 
 const InvestorCard = (props: Props) => {
   return (
-    <div className=" w-[350px] h-[360px] my-4 rounded-xl relative bg-gradient-to-br from-[#2e2e2e28] to-[#fffdfd18]  items-center flex flex-col border-2 border-[#171717] ">
+    <div className=" w-[350px] h-[360px] my-4 rounded-xl relative bg-gradient-to-br from-[#2e2e2e28] to-[#fffdfd18]  items-center flex flex-col border-2 border-[#171717] backdrop-blur-lg ">
       <Image
         src={"/content/discover.webp"}
         alt=""
