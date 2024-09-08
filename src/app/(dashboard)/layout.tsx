@@ -6,7 +6,7 @@ import Spline from "@splinetool/react-spline";
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex h-screen relative bg-black">
+    <div className="flex h-screen relative bg-[#040015]">
       <div className="">
         <ContractedSidebar />
       </div>

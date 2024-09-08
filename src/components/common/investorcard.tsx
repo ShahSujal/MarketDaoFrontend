@@ -7,7 +7,7 @@ type Props = {};
 
 const InvestorCard = (props: Props) => {
   return (
-    <div className=" w-[350px] h-[360px] my-4 rounded-xl relative bg-gradient-to-br from-[#2e2e2e28] to-[#fffdfd18]  items-center flex flex-col border-2 border-[#171717] backdrop-blur-lg ">
+    <div className=" w-[320px] h-[380px] my-4 rounded-xl mx-3 relative bg-gradient-to-br from-[#4342425b] to-[#050505bd]  items-center flex flex-col border-2 border-[#171717] backdrop-blur-lg z-10 ">
       <Image
         src={"/content/discover.webp"}
         alt=""
@@ -18,7 +18,7 @@ const InvestorCard = (props: Props) => {
       <div className=" flex flex-row justify-end items-center absolute right-5 top-3">
         <Image
           src={
-            "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+           "/chain/ethereum.png"
           }
           alt=""
           width={350}
@@ -28,26 +28,29 @@ const InvestorCard = (props: Props) => {
         />
       </div>
       <div className=" w-full flex flex-col justify-center items-center">
-        <h3>30% Returns </h3>
-        <div className=" flex w-full flex-row justify-between items-center px-3">
+   
+        <div className=" flex w-full flex-row justify-between items-center px-3 mt-2">
           <h1 className=" text-xl font-paps font-bold text-gray-300">
             Investor Name
           </h1>
-          <h1 className=" text-lg font-paps font-extralight text-gray-500">
+          <h1 className=" text-lg font-paps font-extralight text-gray-300">
             since 1 year
           </h1>
         </div>
-        <h3 className=" text-gray-500 font-paps font-light px-3">
+        <h3 className=" text-gray-400 font-paps font-light px-3">
           {" "}
           Lorem ipsum dolor sit amet, consectetur asv adipisicing elit. Cum
           blanditiis...{" "}
         </h3>
       </div>
-      <Link href={'/dapp/hello'} className="w-full flex justify-center">
-      <Button className=" w-10/12 mt-3" variant={"secondary"}>
-        pitch now
-      </Button>
-      </Link>
+         <div className=" w-full flex justify-center group items-center h-24 relative rounded-lg">
+          <Image src="/content/circuits-mobile.webp" width={1000} height={1000} alt="" className=" w-full h-20  absolute top-0 grayscale  transition group-hover:grayscale-0 object-cover"/>
+      <Link href={"/dashboard"} className=" w-10/12 mt-6">
+         <button className="flex items-center justify-center flex-row w-full h-10 relative rounded-lg text-gray-200 bg-transparent backdrop-blur-xl z-10 hover:text-white hover:backdrop-blur-sm transition duration-1000 font-fragment font-medium ">
+           Pitch Now
+          </button>
+        </Link>
+         </div>
     </div>
   );
 };

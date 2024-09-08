@@ -6,3 +6,8 @@ export enum EStatus {
     LOADERROR = "loaderror",
     NOTFOUND = "notfound",
   }
+ export type TApiResponse = {
+    status: EStatus;
+    title: string;
+    desciption: string;
+  };

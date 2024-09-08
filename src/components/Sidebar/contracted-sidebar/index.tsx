@@ -14,7 +14,7 @@ import Link from "next/link";
 export default function ContractedSidebar() {
   return (
     <div
-      className="flex h-full w-20 flex-col items-center bg-black font-bold"
+      className="flex h-full w-20 flex-col items-center bg-gradient-to-br from-[#afaeae36] to-[#05050536] font-bold"
       style={{ zIndex: 100 }}
     >
       <div className="my-4 flex items-center justify-center">
@@ -39,7 +39,7 @@ export default function ContractedSidebar() {
           <Separator className="w-11/12 border-white" />
         </div>
       </ScrollArea>
-      <Link href={"/rewards"} className="mx-auto flex justify-center ">
+      <Link href={"/createDapp"} className="mx-auto flex justify-center ">
         <Button className="relative h-10 w-11/12 rounded-[0.8rem] bg-[#CAC1FF] text-base font-medium text-black hover:bg-[#CAC1FF]/80">
           <Rabbit className="-ml-1" />
          
