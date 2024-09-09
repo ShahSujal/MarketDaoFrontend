@@ -8,6 +8,9 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+import { walletAddressShortn } from "@/lib/actions";
+import { TInvestmentMonthlyData } from "@/types/common"
+import { Address } from "viem";
   
   const invoices = [
     {
@@ -53,35 +56,30 @@ import {
       paymentMethod: "Credit Card",
     },
   ]
-  
-  export function PitchTable() {
+  type Props ={
+    analytics: TInvestmentMonthlyData;
+  }
+  export function PitchTable({analytics}:Props) {
     return (
       <Table className=" text-white">
-        {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
         <TableHeader>
+         <h1 className=" text-3xl text-[#c0bebe] my-5 ">Recent Pitches</h1>
           <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
+            <TableHead >walletAddress</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
+            <TableHead>time</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className="text-right">{invoice.totalAmount}</TableCell>
+          {analytics.last10Investments.map((item) => (
+            <TableRow key={item.userId}>
+              <TableCell className="font-medium">{walletAddressShortn(item.userId as Address)}</TableCell>
+              <TableCell>{item.Status}</TableCell>
+              <TableCell>{item.createdAt.toDateString()}</TableCell>
             </TableRow>
           ))}
         </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
-          </TableRow>
-        </TableFooter>
+       
       </Table>
     )
   }

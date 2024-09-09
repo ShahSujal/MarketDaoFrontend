@@ -22,7 +22,7 @@ const Investor = async({ investment }: InvestmentProps) => {
       />
       <div className=" flex flex-row w-full min-h-screen relative">
         <div className=" w-[calc(100%-450px)]">
-          <InvestorDescription investment={investment} />
+          <InvestorDescription investment={investment} analytics={analytics} />
         </div>
 
         <div className=" flex justify-center   bg-zinc-900 items-start flex-col w-[450px] min-h-screen">
