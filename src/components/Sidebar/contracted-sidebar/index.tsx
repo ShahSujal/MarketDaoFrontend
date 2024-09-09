@@ -5,7 +5,7 @@ import {
   onDemand,
   trades,
 } from "@/components/Sidebar/SidebarItems";
-import {AlignHorizontalDistributeCenterIcon, Rabbit} from "lucide-react"
+import { HeartHandshake, Plus} from "lucide-react"
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import SidebarSection from "./SidebarSection";
@@ -18,18 +18,14 @@ export default function ContractedSidebar() {
       style={{ zIndex: 100 }}
     >
       <div className="my-4 flex items-center justify-center">
-        <AlignHorizontalDistributeCenterIcon />
+      <HeartHandshake/>
         
       </div>
       <ScrollArea className="h-[calc(100vh-8rem)] px-2">
         <div className="flex w-full flex-col items-center text-white">
-          {/* <div className="w-full text-center text-[0.813rem]">MARKET PLACE</div> */}
           <SidebarSection section={marketPlace} />
           <Separator className="w-11/12 border-white" />
           <div className="flex w-full flex-col items-center">
-            {/* <div className="mt-6 w-full text-center text-[0.813rem]">
-              CREATE TRADES
-            </div> */}
             <SidebarSection section={trades} />
           </div>
           <Separator className="w-11/12 border-white" />
@@ -40,10 +36,9 @@ export default function ContractedSidebar() {
         </div>
       </ScrollArea>
       <Link href={"/createDapp"} className="mx-auto flex justify-center ">
-        <Button className="relative h-10 w-11/12 rounded-[0.8rem] bg-[#CAC1FF] text-base font-medium text-black hover:bg-[#CAC1FF]/80">
-          <Rabbit className="-ml-1" />
-         
-          {/* <GotoArrowCircle className="absolute -top-[35%]" /> */}
+        <Button className="relative h-20 w-11/12 flex flex-col rounded-[0.8rem] bg-[#CAC1FF] text-base font-medium text-black hover:bg-[#CAC1FF]/80">
+          <Plus className="-ml-1" />
+           Create
         </Button>
       </Link>
     </div>

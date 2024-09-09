@@ -37,7 +37,7 @@ interface DialogContentProps
 const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
   ({ className, children, close = true, ...props }, ref) => (
     <DialogPortal>
-      <div className="fixed bottom-0 left-[5rem] right-0 top-0 z-50 p-8 md:left-[22rem]">
+      <div className="fixed w-screen h-full left-0 top-0 z-50 ">
         <DialogOverlay />
         <DialogPrimitive.Content
           aria-describedby=""
@@ -50,7 +50,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
         >
           {children}
           {close && (
-            <DialogPrimitive.Close className="absolute right-4 top-4 transform rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+            <DialogPrimitive.Close className="absolute right-4 top-4 transform rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground flex justify-center items-center">
               <Close />
               <span className="sr-only">Close</span>
             </DialogPrimitive.Close>

@@ -41,12 +41,13 @@ model Pitch {
   initialInvestment      Int
   profitAmountEstimation Int
   isNative               Boolean
-  investmentTokenAddress String
+  investmentTokenAddress String?
   profitPercentageAmount Int
+  chainId                Int
   isExecuted             Boolean
-  voteFor                Int
-  voteAgainst            Int
-  totalVoters            Int
+  voteFor                Int @default(0)
+  voteAgainst            Int  @default(0)
+  totalVoters            Int  @default(0)
   Status                 Status @default(ACTIVE)
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
@@ -65,7 +66,7 @@ model Investment {
   userId                 String
   user                   User     @relation(fields: [userId], references: [walletAddress])
   accounts               String[] @default([])
-  partnerInvestors       Stake[]
+  partnerInvestors       Stake[] 
   title                  String
   description            String
   image                  String

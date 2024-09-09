@@ -21,3 +21,25 @@ export const createUser = async (walletAddress: Address) => {
     return response;
 } 
 
+export const getUserDetails = async (walletAddress: Address) => {
+    const investor = await client.user.findUnique({
+        where:{
+            walletAddress: walletAddress
+        }
+    })
+   if (investor) {
+       return investor;
+   }else{
+    return {}
+   }
+} 
+
+export const getUsers = async () => {
+    const investor = await client.user.findMany()
+   if (investor) {
+       return investor;
+   }else{
+    return []
+   }
+} 
+
