@@ -31,7 +31,8 @@ const fileToBase64 = (file: File): Promise<string> => {
 export const createInvestmentFunction = async (
   data: TInvestmentProps
 ): Promise<TApiResponse> => {
-  const walletAddress = await getAccount(config).address;
+try {
+  const walletAddress = "0xC199B073f2c43bC347dE431fAD9B01208F6aC7E5";
   if (!walletAddress) {
     return {
       status: EStatus.ERROR,
@@ -42,6 +43,7 @@ export const createInvestmentFunction = async (
 
   const { request } = await simulateContract(config, {
     address: process.env.NEXT_PUBLIC_INVESTOR_CONTRACT as Address,
+    chainId: 97,
     abi: investorcontractabi,
     functionName: "listNewInvestor",
     args: [data.tokenName, data.tokenSymbol],
@@ -49,31 +51,20 @@ export const createInvestmentFunction = async (
 
   const hash = await writeContract(config, request);
 
-  const receipt = await waitForTransactionReceipt(config, {
-    hash,
-    retryCount: 20,
-    confirmations: 5,
-  });
+  // const receipt = await waitForTransactionReceipt(config, {
+  //   hash,
+  //   confirmations: 1,
+  // });
 
-  if (receipt.status === "reverted") {
-    return {
-      status: EStatus.ERROR,
-      title: "Investment creation failed",
-      desciption: "Investment creation failed",
-    };
-  }
-console.log(
-  {
-    title: data.title,
-    description: data.description,
-    imageFile: data.imageFile,
-    tokenAddress: data.tokenAddress,
-    tokenSymbol: data.tokenSymbol,
-    tokenName: data.tokenName,
-    walletAddress: walletAddress,
-  }
-);
+  // console.log({ receipt });
+  
+
+  // if (receipt.status === "success") {
+   
+
 const base64Image = await fileToBase64(data.imageFile);
+console.log({ base64Image });
+
   const response = await createInvestment({
     title: data.title,
     description: data.description,
@@ -96,4 +87,20 @@ const base64Image = await fileToBase64(data.imageFile);
           desciption: "Investment created successfully",
         };
     }
+  // }else{
+  //   return {
+  //     status: EStatus.ERROR,
+  //     title: "Investment creation failed",
+  //     desciption: "Investment creation failed",
+  //   };
+  // }
+} catch (error) {
+  console.log(error);
+  return {
+    status: EStatus.ERROR,
+    title: "Investment creation failed",
+    desciption: "Investment creation failed",
+  };
+  
+}
 };

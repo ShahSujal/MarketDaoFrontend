@@ -23,13 +23,13 @@ export default function ContractedSidebar() {
       </div>
       <ScrollArea className="h-[calc(100vh-8rem)] px-2">
         <div className="flex w-full flex-col items-center text-white">
-          <div className="w-full text-center text-[0.813rem]">MARKET PLACE</div>
+          {/* <div className="w-full text-center text-[0.813rem]">MARKET PLACE</div> */}
           <SidebarSection section={marketPlace} />
           <Separator className="w-11/12 border-white" />
           <div className="flex w-full flex-col items-center">
-            <div className="mt-6 w-full text-center text-[0.813rem]">
+            {/* <div className="mt-6 w-full text-center text-[0.813rem]">
               CREATE TRADES
-            </div>
+            </div> */}
             <SidebarSection section={trades} />
           </div>
           <Separator className="w-11/12 border-white" />

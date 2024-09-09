@@ -22,33 +22,27 @@ interface Step1Props {
   setLoadData: React.Dispatch<React.SetStateAction<LoadDataType>>;
   loadData: LoadDataType;
 }
-interface ImageResponse {
-  success: boolean;
-  prompt: string;
-}
 export function Step1({ setLoadData, loadData }: Step1Props) {
- const [loading, setLoading] = useState(false);
-
   return (
     <div className="w-full lg:grid lg:h-[80vh] lg:grid-cols-2  xl:h-[80vh]">
       <div className="flex items-center justify-center ">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold text-gray-100">
-              user details
+              Investment Details
             </h1>
             <p className="text-balance text-muted-foreground">
-              Enter your email below to login to your account
+              Enter your title of your investment
             </p>
           </div>
             <div className="grid gap-4">
               <div className="grid gap-2">
-                <Label htmlFor="title">UserName</Label>
+                <Label htmlFor="title">Title</Label>
                 <Input
                   id="title"
                   type="text"
                
-                  placeholder="username"
+                  placeholder="title of your investment"
                   required
                   onChange={(e) => {
                     setLoadData({ ...loadData, title: e.target.value });
@@ -56,12 +50,12 @@ export function Step1({ setLoadData, loadData }: Step1Props) {
                 />
               </div>
               <div className="grid gap-2">
-                <Label>Bio</Label>
+                <Label>Description</Label>
                 <Textarea
                   onChange={(e) => {
                     setLoadData({ ...loadData, description: e.target.value });
                   }}
-                  placeholder="Describe yourself in a few words"
+                  placeholder="Describe your investments"
                 />
               </div>
               <div className="grid grid-cols-2 gap-4"></div>

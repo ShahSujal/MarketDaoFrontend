@@ -1,53 +1,44 @@
-"use client"
-
-import { TrendingUp } from "lucide-react"
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
+"use client";
+import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
-
-export const description = "A line chart"
-
-const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 73 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
-]
+} from "@/components/ui/chart";
+import { TInvestmentMonthlyData } from "@/types/common";
 
 const chartConfig = {
   desktop: {
     label: "Desktop",
     color: "hsl(var(--chart-1))",
   },
-} satisfies ChartConfig
-
-export function Graph() {
+} satisfies ChartConfig;
+type TGraphProps = {
+  analytics: TInvestmentMonthlyData;
+};
+export function Graph({ analytics }: TGraphProps) {
   return (
-    <Card className="bg-black w-full h-full">
+    <Card className="w-full h-full">
       <CardHeader>
-        <CardTitle>Line Chart</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Past 6 months Pitches Analytics</CardTitle>
+        <CardDescription>
+          {analytics.monthlyData[0].month} - {analytics.monthlyData[5].month}
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
           <LineChart
             accessibilityLayer
-            data={chartData}
+            data={analytics.monthlyData}
             margin={{
               left: 12,
               right: 12,
@@ -66,7 +57,7 @@ export function Graph() {
               content={<ChartTooltipContent hideLabel />}
             />
             <Line
-              dataKey="desktop"
+              dataKey="count"
               type="natural"
               stroke="white"
               strokeWidth={2}
@@ -75,7 +66,6 @@ export function Graph() {
           </LineChart>
         </ChartContainer>
       </CardContent>
-     
     </Card>
-  )
+  );
 }

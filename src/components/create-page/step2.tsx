@@ -35,6 +35,7 @@ export function Step2({ setLoadData, loadData }: Step1Props) {
     }
   };
  const handleSubmit = async () => {
+  setLoading(true);
   if (!address) {
     return toast({
       title: "Wallet not found",
@@ -214,3 +215,12 @@ console.log({
               <Input id="price"   className="bg-[#ffffff62]" type="number" placeholder="Price" required />
             </div> */
 }
+/*
+GreenField Company is a strategic crypto investor with a passion for advancing decentralized finance (DeFi) as the cornerstone of a more open and efficient financial system. Their vision is rooted in the belief that blockchain technology holds the key to reshaping global finance by removing intermediaries, lowering transaction costs, and providing broader access to financial services.
+
+A firm believer in the potential of DeFi to disrupt traditional financial institutions, GreenField Company carefully evaluates projects that offer innovative solutions to real-world challenges. They prioritize investments in platforms that enhance user empowerment, such as decentralized exchanges (DEXs), yield farming protocols, and decentralized lending platforms. By fostering projects that prioritize transparency, security, and scalability, GreenField Company seeks to contribute to the broader adoption of decentralized technologies.
+
+In an ever-evolving market, GreenField Company combines technical analysis with a deep understanding of blockchain trends to identify long-term opportunities. They are committed to supporting ecosystems that provide sustainable growth, favoring projects with strong governance models, active communities, and a clear roadmap for the future.
+
+As a visionary investor, GreenField Company strives to build a portfolio that not only delivers returns but also accelerates the global transition to decentralized, more inclusive financial systems.
+*/

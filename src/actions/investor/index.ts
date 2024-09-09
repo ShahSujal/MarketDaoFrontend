@@ -1,9 +1,11 @@
 "use server";
 
 import { client } from "@/lib/config/prismaconfig";
-import { EStatus, TApiResponse } from "@/types/common";
+import { EStatus, TApiResponse, TInvestmentMonthlyData, TInvestorIdProps } from "@/types/common";
 import { v4 as uuidv4 } from 'uuid';
 import { createClient } from "@supabase/supabase-js";
+import { Investment, Pitch, Status, User } from "@prisma/client";
+import { subMonths, startOfMonth, endOfMonth } from "date-fns";
 
 type TInvestmentProps = {
   tokenAddress: string;
@@ -14,6 +16,7 @@ type TInvestmentProps = {
   imageFile: string; // Base64 string
   walletAddress: string;
 };
+
 
 // Create a single supabase client for interacting with your database
 const supabase = createClient(
@@ -49,7 +52,6 @@ export const createInvestment = async (
       cacheControl: "3600",
       upsert: false,
     });
-  console.log({ uploadData, uploadError });
 
   if (uploadError) {
     return {
@@ -69,7 +71,6 @@ export const createInvestment = async (
       userId: data.walletAddress,
     },
   });
-  console.log({ response });
 
   if (!response) {
     return {
@@ -84,4 +85,73 @@ export const createInvestment = async (
       desciption: "Investment created successfully",
     };
   }
+};
+
+export const getInvestments = async ():Promise<Investment[]> => {
+  const response = await client.investment.findMany();
+  if (response) {
+    return response;
+  }else{
+    return [];
+  }
+}
+
+export const getInvestmentById = async (id: string):Promise<TInvestorIdProps> => {
+  const response = await client.investment.findUnique({
+    where:{
+      id: id
+    },
+    include:{
+      user:true,
+    }
+  });
+  if (response) {
+    return response;
+  }else{
+    return {} as TInvestorIdProps;
+  }
+}
+
+
+
+
+
+export const getPitchesByInvestorAndMonth = async (investorId: string): Promise<TInvestmentMonthlyData> => {
+  const now = new Date();
+  const sixMonthsAgo = subMonths(now, 6);
+
+  const pitches = await client.pitch.findMany({
+    where: {
+      investment: {
+        userId: investorId,
+      },
+      createdAt: {
+        gte: sixMonthsAgo,
+      },
+    },
+    select: {
+      createdAt: true,
+      userId: true,
+      Status: true,
+      isExecuted: true,
+      deadline: true,
+    },
+  });
+  const monthlyData = Array.from({ length: 6 }, (_, i) => {
+    const monthStart = startOfMonth(subMonths(now, i));
+    const monthEnd = endOfMonth(subMonths(now, i));
+    const monthName = monthStart.toLocaleString('default', { month: 'long' });
+
+    const monthlyPitches = pitches.filter(pitch => pitch.createdAt >= monthStart && pitch.createdAt <= monthEnd);
+
+    return {
+      month: monthName,
+      count: monthlyPitches.length,
+    };
+  }).reverse();
+
+  return {
+    monthlyData:monthlyData,
+    last10Investments: pitches.slice(0,10)
+  };
 };
