@@ -13,7 +13,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="flex h-screen flex-1 flex-col">
         <Navbar/>
         <ScrollArea className="absolute inset-0 h-screen">
-          <div className="flex-1 py-10 pb-0 pl-[20px]">{children}</div>
+          <div className="flex-1">{children}</div>
         </ScrollArea>
       </div>
     </div>

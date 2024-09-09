@@ -1,26 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
-import {
-  Search,
-  Menu,
-  Package2,
-  CircleUser,
-  Dot,
-  AlignEndVerticalIcon,
-} from "lucide-react";
-import Link from "next/link";
 import { useAccount } from "wagmi";
 import { walletAddressShortn } from "@/lib/actions";
 import { createUser } from "@/actions/user";
@@ -43,9 +23,9 @@ const Navbar = (props: Props) => {
   }, [address]);
 
   return (
-    <nav className=" flex justify-end items-center w-full h-[40px] px-6">
+    <nav className=" flex justify-end items-center w-full h-[44px] px-6">
       {chain?.name && (
-        <div className={` w-[180px] h-8 relative rounded-2xl`}>
+        <div className={` w-[180px] h-8 relative flex justify-center items-center rounded-2xl`}>
           <Image
             src={"/content/cardbg.jpeg"}
             width={100}
@@ -72,7 +52,7 @@ const Navbar = (props: Props) => {
           </button>
         </div>
       )}
-      <div className={`w-[180px] h-8 relative rounded-2xl`}>
+      <div className={`w-[180px] h-8 ml-4 relative flex justify-center items-center rounded-2xl`}>
         <Image
           src={"/content/cardbg.jpeg"}
           width={100}

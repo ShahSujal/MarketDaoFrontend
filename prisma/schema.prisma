@@ -19,6 +19,10 @@ model User {
   image         String?
   investments   Investment[]
   pitches       Pitch[]
+  stakes        Stake[]
+  discord       String?
+  twitter       String?
+  opensea       String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
@@ -45,13 +49,21 @@ model Pitch {
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
 }
-
+model Stake {
+  id                    String   @default(uuid()) @id
+  userId                 String
+  user                   User     @relation(fields: [userId], references: [walletAddress])
+  investmentId           String
+  investment             Investment  @relation(fields: [investmentId], references: [id])
+  stake                  Int
+  createdAt              DateTime @default(now())
+}
 model Investment {
   id                     String   @default(uuid()) @id
   userId                 String
   user                   User     @relation(fields: [userId], references: [walletAddress])
   accounts               String[] @default([])
-  partnerInvestors       String[]
+  partnerInvestors       Stake[]
   title                  String
   description            String
   image                  String

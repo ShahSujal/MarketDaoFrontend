@@ -2,10 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-import { InvestorCarousel } from "@/components/investor/investors-carousel";
-import { PitchTable } from "../common/pitchesmap";
 import { TInvestmentMonthlyData, TInvestorIdProps } from "@/types/common";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import InvestorAnanlytics from "./investor-ananlytics";
 
 type Props = {
@@ -17,9 +14,9 @@ const InvestorDescription = ({ investment, analytics }: Props) => {
   const [showAnalytics, setshowAnalytics] = useState(false);
   return (
     <section className=" p-4 w-full">
-      <div className=" flex justify-center items-center flex-row">
-        <button onClick={() => setshowAnalytics(false)}>Description</button>
-        <button onClick={() => setshowAnalytics(true)}>Analytics</button>
+      <div className=" flex  flex-row space-x-6">
+        <button onClick={() => setshowAnalytics(false)} className={!showAnalytics?"text-white border-b border-white":"text-gray-600"}>Description</button>
+        <button onClick={() => setshowAnalytics(true)} className={showAnalytics?"text-white border-b border-white":"text-gray-600"}>Analytics</button>
       </div>
 
       {showAnalytics ? (
