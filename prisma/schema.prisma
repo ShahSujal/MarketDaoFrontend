@@ -7,10 +7,30 @@ datasource db {
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
+
 enum Status {
   ACTIVE
   INACTIVE
   ADMINREMOVED
+}
+
+enum CampaignStatus {
+  NOTSTARTED
+  STARTED
+  ENDED
+  REWARDSDISTRIBUTED
+  ADMINREMOVED
+}
+enum RewardsType {
+  NOTSTARTED
+  STARTED
+  ENDED
+  REWARDSDISTRIBUTED
+  ADMINREMOVED
+}
+enum ParticpationType {
+  EVERYONE
+  PERMITED
 }
 
 model User {
@@ -22,6 +42,8 @@ model User {
   pitches       Pitch[]
   stakes        Stake[]
   liquiditys    CurrentLiquidity[]
+  campaigns     Campaign[]
+  winnedCampaigns Campaign[] @relation("CampaignWinners")
   discord       String?
   twitter       String?
   opensea       String?
@@ -52,6 +74,7 @@ model Pitch {
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
 }
+
 model Stake {
   id                    String   @default(uuid()) @id
   userId                 String
@@ -59,14 +82,16 @@ model Stake {
   investmentId           String
   investment             Investment  @relation(fields: [investmentId], references: [id])
   stake                  Int
+  chainId                Int
   createdAt              DateTime @default(now())
 }
+
 model Investment {
   id                     String   @default(uuid()) @id
   userId                 String
   user                   User     @relation(fields: [userId], references: [walletAddress])
   accounts               String[] @default([])
-  partnerInvestors       Stake[] 
+  partners               Stake[] 
   title                  String
   description            String
   image                  String
@@ -79,6 +104,7 @@ model Investment {
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
 }
+
 model CurrentLiquidity {
   id                     String   @default(uuid()) @id
   userId                 String
@@ -86,4 +112,28 @@ model CurrentLiquidity {
   tokenAddress           String?
   isNative               Boolean
   amount                 Int
+}
+
+model Campaign {
+  id                     String   @default(uuid()) @id
+  ownerId                String
+  owner                  User     @relation(fields: [ownerId], references: [walletAddress])
+  title                  String
+  description            String
+  image                  String
+  totalWinners           Int
+  totalPrize             Int
+  campaignStartDate      DateTime
+  campaginEndDate        DateTime
+  campaignWinners        User[] @relation("CampaignWinners")
+  rewardType             RewardsType
+  isNative               Boolean
+  chainId                Int
+  tokenAddress           String?
+  tokenSymbol            String?
+  tokenName              String?
+  particpationType       ParticpationType
+  status                 CampaignStatus @default(NOTSTARTED)
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
 }

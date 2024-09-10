@@ -23,7 +23,7 @@ export const trades = [
     title: "deTalks",
     shortTitle: "deTalks",
     icon: <MessagesSquare />,
-    comingSoon: false,
+    comingSoon: true,
   },
   {
     redirectUrl: "/campaign",

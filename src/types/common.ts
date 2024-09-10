@@ -31,9 +31,9 @@ export type TInvestorIdProps = {
   id: string;
   userId: string;
   accounts: string[];
-  partnerInvestors: string[];
   title: string;
   description: string;
+  partners: Stake[];
   image: string;
   tokenAddress: string;
   tokenSymbol: string;
@@ -47,7 +47,36 @@ export type TInvestorIdProps = {
     name: string | null;
     bio: string | null;
     image: string | null;
+    discord: string | null;
+    twitter: string | null;
+    opensea: string | null;
     createdAt: Date;
     updatedAt: Date;
   };
 };
+
+
+type User = {
+  walletAddress: string;
+  name: string | null;
+  bio: string | null;
+  image: string | null;
+  discord: string | null;
+  twitter: string | null;
+  opensea: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+type Stake = {
+  id: string;
+  userId: string;
+  investmentId: string;
+  stake: number;
+  chainId: number;
+  createdAt: Date;
+};
+
+export type TInvestorStake = (User & {
+  stakes: Stake[];
+});

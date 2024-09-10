@@ -34,12 +34,5 @@ export const getUserDetails = async (walletAddress: Address) => {
    }
 } 
 
-export const getUsers = async () => {
-    const investor = await client.user.findMany()
-   if (investor) {
-       return investor;
-   }else{
-    return []
-   }
-} 
+
 
