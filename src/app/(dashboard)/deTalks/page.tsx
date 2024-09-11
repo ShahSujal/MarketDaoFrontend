@@ -1,22 +1,16 @@
-import React from 'react'
-import {
-  Client,
-  useStreamMessages,
-  useClient,
-  useMessages,
-  useConversations,
-  useCanMessage,
-  useStartConversation,
-} from "@xmtp/react-sdk";
+"use client";
+import Detalks from '@/components/deTalks';
+import React, { useCallback } from 'react'
+import { useAccount } from 'wagmi';
+
 
 const page = () => {
-const { client, initialize } = useClient();
-const { conversations } = useConversations();
-const { startConversation } = useStartConversation();
-const { canMessage } = useCanMessage();
+  const {address} = useAccount();
   return (
     <div>
-      
+      {
+        address ? Detalks() : <div>Connect your wallet to continue</div>
+      }
     </div>
   )
 }
