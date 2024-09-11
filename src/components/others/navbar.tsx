@@ -35,7 +35,7 @@ const Navbar = (props: Props) => {
           />
           <button
             className="flex items-center justify-center flex-row w-40 h-8 relative rounded-2xl text-gray-400 bg-transparent backdrop-blur-xl z-10 hover:text-white hover:backdrop-blur-sm transition duration-1000 font-fragment font-medium "
-            onClick={() => open()}
+            onClick={() => open({ view: "Networks" })}
           >
             {chainsWithLogo.find((chain) => chain.chainId === chainId)
               ?.chainName || chain?.name}

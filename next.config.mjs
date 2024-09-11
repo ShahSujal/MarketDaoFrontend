@@ -2,6 +2,7 @@
 const nextConfig = {
     webpack: config => {
         config.externals.push('pino-pretty', 'lokijs', 'encoding')
+        // config.experimental = { esmExternals: true }
         return config
       },
 

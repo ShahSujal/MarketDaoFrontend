@@ -6,7 +6,7 @@ import { config } from "@/lib/config/wagmiConfig";
 import AppKitProvider from "@/lib/config/wagmiContext";
 import Navbar from "@/components/others/navbar";
 import { ThemeProvider } from "./nextProvider";
-import { XMTPProvider } from "@xmtp/react-sdk";
+// import { XMTPProvider } from "@xmtp/react-sdk";
 
 export default function MasterWrapper({
   children,
@@ -17,7 +17,7 @@ export default function MasterWrapper({
   return (
     <AppKitProvider initialState={initialState}>
       {/* <Navbar /> */}
-      <XMTPProvider>
+      {/* <XMTPProvider> */}
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -26,7 +26,7 @@ export default function MasterWrapper({
         >
           {children}
         </ThemeProvider>
-      </XMTPProvider>
+      {/* </XMTPProvider> */}
       <Toaster />
     </AppKitProvider>
   );
