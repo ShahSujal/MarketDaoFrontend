@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import { useAccount, useConnect, useWalletClient } from "wagmi";
 import {
   Client,
@@ -10,9 +10,11 @@ import {
   useCanMessage,
   useStartConversation,
   Signer,
+  isValidAddress
 } from "@xmtp/react-sdk";
 import { Button } from "../ui/button";
 import { loadKeys, storeKeys } from "@/lib/xmtpKeys";
+import { isAddress } from "viem";
 const Detalks = () => {
   const { client, initialize } = useClient();
   const { data: walletClient } = useWalletClient();
@@ -20,10 +22,12 @@ const Detalks = () => {
   const [isOnNetwork, setIsOnNetwork] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { conversations } = useConversations();
+  const [message, setMessage] = useState("");
   console.log(conversations, "conversations");
 
   const { startConversation } = useStartConversation();
   const { canMessage } = useCanMessage();
+  
   // const { data: walletClient, isLoading, error:walletClientError } = useWalletClient();
   const { chainId, address } = useAccount();
 
@@ -84,10 +88,82 @@ const Detalks = () => {
   };
   // const { messages } = useMessages(conversation);
 
+
+
+  const handleAddressChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      console.log("address", e.target.value);
+      
+      setPeerAddress(e.target.value);
+    },
+    [],
+  ); 
+   const handleMessageChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setMessage(e.target.value);
+    },
+    [],
+  );
+ 
+  const handleStartConversation = useCallback(
+    async () => {
+      if (peerAddress && message) {
+        setIsLoading(true);
+        const conversation = await startConversation(peerAddress, message);
+        setIsLoading(false);
+      }
+    },
+    [message, peerAddress, startConversation],
+  );
+
+
+  const handleCheckAddress = useCallback(async () => {
+    // e.preventDefault();
+    console.log("checkAddress", peerAddress);
+    
+    if (isValidAddress(peerAddress)) {
+      console.log("valid address", peerAddress);
+      
+      setIsLoading(true);
+      setIsOnNetwork(await canMessage(peerAddress));
+      console.log("isOnNetwork", isOnNetwork);
+      
+      setIsLoading(false);
+    } else {
+      console.log("invalid address" , peerAddress);
+      
+      setIsOnNetwork(false);
+    }
+  }, [peerAddress]);
+//   void checkAddress();
+
+
+
   return (
-    <div className=" w-full min-h-screen flex justify-center items-center">
+    <div className=" w-full min-h-screen flex flex-col justify-center items-center">
       <Button onClick={() => handleConnect()}>Connect</Button>
       <Button onClick={() => checkUserCanMessage()}>Message</Button>
+      <Button onClick={() => handleCheckAddress()}>check address</Button>
+      <Button onClick={() => handleStartConversation()}>sendMessage</Button>
+      
+
+      <form onSubmit={handleStartConversation} className=" flex flex-col h-[450px] w-full justify-evenly items-center">
+      <input
+        name="addressInput"
+        type="text"
+        onChange={handleAddressChange}
+        disabled={isLoading}
+        placeholder="Enter address"
+      />
+      <input
+        name="messageInput"
+        type="text"
+        className="mx-5"
+        placeholder="Enter message"
+        onChange={handleMessageChange}
+        disabled={isLoading || !isValidAddress(peerAddress)}
+      />
+    </form>
     </div>
   );
 };
