@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 import { createClient } from "@supabase/supabase-js";
 import { Investment, Pitch, Status } from "@prisma/client";
 import { subMonths, startOfMonth, endOfMonth } from "date-fns";
+import { base64ToBlob } from "@/lib/actions";
 
 type TInvestmentProps = {
   tokenAddress: string;
@@ -28,17 +29,6 @@ const supabase = createClient(
   process.env.SUPABASE_ANON_KEY!
 );
 
-// Utility function to convert Base64 to Blob
-const base64ToBlob = (base64: string): Blob => {
-  const byteString = atob(base64.split(",")[1]);
-  const mimeString = base64.split(",")[0].split(":")[1].split(";")[0];
-  const ab = new ArrayBuffer(byteString.length);
-  const ia = new Uint8Array(ab);
-  for (let i = 0; i < byteString.length; i++) {
-    ia[i] = byteString.charCodeAt(i);
-  }
-  return new Blob([ab], { type: mimeString });
-};
 
 export const createInvestment = async (
   data: TInvestmentProps

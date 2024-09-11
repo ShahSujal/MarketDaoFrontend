@@ -28,10 +28,18 @@ enum RewardsType {
   REWARDSDISTRIBUTED
   ADMINREMOVED
 }
+enum TaskType {
+  YOUTUBEVIDEO
+  YOUTUBESHORT
+  TWITTERTWEET
+  TWITTERPOST
+}
 enum ParticpationType {
   EVERYONE
   PERMITED
 }
+
+
 
 model User {
   walletAddress String @id
@@ -132,6 +140,10 @@ model Campaign {
   tokenAddress           String?
   tokenSymbol            String?
   tokenName              String?
+  campaignPostImage      String?
+  campaignPostLink       String?
+  campaignPostVideo      String?
+  taskType               TaskType
   particpationType       ParticpationType
   status                 CampaignStatus @default(NOTSTARTED)
   createdAt              DateTime @default(now())

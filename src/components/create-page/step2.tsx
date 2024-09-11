@@ -23,9 +23,9 @@ interface ImageResponse {
   image: string[];
 }
 export function Step2({ setLoadData, loadData }: Step1Props) {
- const [loading, setLoading] = useState(false);
- const {address} = useAccount()
- const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const { address } = useAccount();
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [imageFile, setImageFile] = useState<File | undefined>(undefined);
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -34,154 +34,147 @@ export function Step2({ setLoadData, loadData }: Step1Props) {
       setImageUrl(URL.createObjectURL(file));
     }
   };
- const handleSubmit = async () => {
-  setLoading(true);
-  if (!address) {
-    return toast({
-      title: "Wallet not found",
-      description: "Please connect your wallet to continue",
+  const handleSubmit = async () => {
+    setLoading(true);
+    if (!address) {
+      return toast({
+        title: "Wallet not found",
+        description: "Please connect your wallet to continue",
+      });
+    }
+    if (!imageFile) {
+      return toast({
+        title: "Image not found",
+        description: "Please upload an image to continue",
+      });
+    }
+    console.log({
+      tokenName: loadData.tokenName,
+      tokenSymbol: loadData.tokenSymbol,
+      tokenAddress: "0x",
+      title: loadData.title,
+      description: loadData.description,
+      imageFile: imageFile,
     });
-  }
-  if (!imageFile) {
-    return toast({
-      title: "Image not found",
-      description: "Please upload an image to continue",
+
+    const response: TApiResponse = await createInvestmentFunction({
+      tokenName: loadData.tokenName,
+      tokenSymbol: loadData.tokenSymbol,
+      tokenAddress: "0x",
+      title: loadData.title,
+      description: loadData.description,
+      imageFile: imageFile,
     });
-  }
-console.log({
-  tokenName: loadData.tokenName,
-  tokenSymbol: loadData.tokenSymbol,
-  tokenAddress: "0x",
-  title: loadData.title,
-  description: loadData.description,
-  imageFile: imageFile
-});
-
-  const response:TApiResponse  = await createInvestmentFunction({
-    tokenName: loadData.tokenName,
-    tokenSymbol: loadData.tokenSymbol,
-    tokenAddress: "0x",
-    title: loadData.title,
-    description: loadData.description,
-    imageFile: imageFile
-  });
-  if(response.status === EStatus.SUCCESS){
-  console.log("success");
-  return toast({
-    title: "Investment created",
-    description: "Investment created successfully"
-  })
-  }else{
-    console.log("error");
-    console.log(response);
-    return toast({
-      title: "Investment creation failed",
-      description: "Investment creation failed"
-    })
-    
-  }
-
- }
+    if (response.status === EStatus.SUCCESS) {
+      console.log("success");
+      return toast({
+        title: "Investment created",
+        description: "Investment created successfully",
+      });
+    } else {
+      console.log("error");
+      console.log(response);
+      return toast({
+        title: "Investment creation failed",
+        description: "Investment creation failed",
+      });
+    }
+  };
   return (
-    <div className="w-full lg:grid lg:min-h-[80vh] lg:grid-cols-2 xl:min-h-[80vh]">
+    <div className="w-full lg:grid min-h-[80vh] lg:grid-cols-2">
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold text-gray-100">
-             governance details
+              governance details
             </h1>
             <p className="text-balance text-muted-foreground">
               Enter token details
             </p>
           </div>
-            <div className="grid gap-4">
-              <div className="grid gap-2">
-                <Label htmlFor="title">Token Name</Label>
-                <Input
-                  id="title"
-                  type="text"
-      
-                  placeholder="Token Name"
-                  required
-                  onChange={(e) => {
-                    setLoadData({ ...loadData, tokenName: e.target.value });
-                  }}
-                />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="title">Token Symbol</Label>
-                <Input
-                  id="title"
-                  type="text"
-              
-                  placeholder="Token Symbol"
-                  required
-                  onChange={(e) => {
-                    setLoadData({ ...loadData, tokenSymbol: e.target.value });
-                  }}
-                />
-              </div>
-              <div className="flex items-center justify-center w-full">
-                            <label
-                              htmlFor="dropzone-file"
-                              className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-zinc-900  hover:bg-zinc-800  "
-                            >
-                              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                                <svg
-                                  className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                  aria-hidden="true"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  fill="none"
-                                  viewBox="0 0 20 16"
-                                >
-                                  <path
-                                    stroke="currentColor"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    stroke-width="2"
-                                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                                  />
-                                </svg>
-                                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                                  <span className="font-semibold">
-                                    Click to upload
-                                  </span>{" "}
-                                  or drag and drop
-                                </p>
-                                <p className="text-xs text-gray-500 dark:text-gray-400">
-                                  SVG, PNG, JPG or GIF (MAX. 800x400px)
-                                </p>
-                              </div>
-                              <input
-                                id="dropzone-file"
-                                type="file"
-                                className="hidden"
-                                onChange={handleFileChange}
-                              />
-                            </label>
-                          </div>
-              <div className="grid grid-cols-2 gap-4"></div>
-              <Button
-                variant="outline"
-                className="w-full"
-                type="submit"
-                onClick={() => {
-                  handleSubmit();
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="title">Token Name</Label>
+              <Input
+                id="title"
+                type="text"
+                placeholder="Token Name"
+                required
+                onChange={(e) => {
+                  setLoadData({ ...loadData, tokenName: e.target.value });
                 }}
-              >
-                Submit
-              </Button>
-              <Button
-                type="submit"
-                className="w-full"
-                onClick={() => {
-                  setLoadData({ ...loadData, step: 0 });
-                }}
-              >
-                Back
-              </Button>
+              />
             </div>
-          
+            <div className="grid gap-2">
+              <Label htmlFor="title">Token Symbol</Label>
+              <Input
+                id="title"
+                type="text"
+                placeholder="Token Symbol"
+                required
+                onChange={(e) => {
+                  setLoadData({ ...loadData, tokenSymbol: e.target.value });
+                }}
+              />
+            </div>
+            <div className="flex items-center justify-center w-full">
+              <label
+                htmlFor="dropzone-file"
+                className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-zinc-900  hover:bg-zinc-800  "
+              >
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                  <svg
+                    className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 16"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      stroke-width="2"
+                      d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                    />
+                  </svg>
+                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">Click to upload</span> or
+                    drag and drop
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    SVG, PNG, JPG or GIF (MAX. 800x400px)
+                  </p>
+                </div>
+                <input
+                  id="dropzone-file"
+                  type="file"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+              </label>
+            </div>
+            <div className="grid grid-cols-2 gap-4"></div>
+            <Button
+              variant="outline"
+              className="w-full"
+              type="submit"
+              onClick={() => {
+                handleSubmit();
+              }}
+            >
+              Submit
+            </Button>
+            <Button
+              type="submit"
+              className="w-full"
+              onClick={() => {
+                setLoadData({ ...loadData, step: 0 });
+              }}
+            >
+              Back
+            </Button>
+          </div>
         </div>
       </div>
       <div className="hidden bg-muted lg:flex relative  justify-center items-center">

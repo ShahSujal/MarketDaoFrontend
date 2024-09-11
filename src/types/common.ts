@@ -1,4 +1,4 @@
-import { Status } from "@prisma/client";
+import { ParticpationType, RewardsType, Status, TaskType } from "@prisma/client";
 
 export enum EStatus {
   LOADING = "loading",
@@ -80,3 +80,23 @@ type Stake = {
 export type TInvestorStake = (User & {
   stakes: Stake[];
 });
+
+export type TCreateCampaignProps = {
+  title: string;
+  description: string;
+  image: File;
+  totalWinners: number;
+  totalPrize: number;
+  campaignStartDate: Date;
+  campaginEndDate: Date;
+  rewardType: RewardsType;
+  isNative: boolean;
+  chainId: number;
+  tokenAddress?: string;
+  tokenSymbol?: string;
+  tokenName?: string;
+  taskType: TaskType;
+  particpationType: ParticpationType;
+  walletAddress: string; 
+  imageFile?: string;
+};

@@ -35,7 +35,7 @@ export default function ContractedSidebar() {
           <Separator className="w-11/12 border-white" />
         </div>
       </ScrollArea>
-      <Link href={"/createDapp"} className="mx-auto flex justify-center ">
+      <Link href={"/create"} className="mx-auto flex justify-center ">
         <Button className="relative h-20 w-11/12 flex flex-col rounded-[0.8rem] bg-[#CAC1FF] text-base font-medium text-black hover:bg-[#CAC1FF]/80">
           <Plus className="-ml-1" />
            Create

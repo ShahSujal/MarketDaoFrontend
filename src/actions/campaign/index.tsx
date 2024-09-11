@@ -1,31 +1,42 @@
+import { base64ToBlob } from "@/lib/actions";
 import { client } from "@/lib/config/prismaconfig";
-import { EStatus } from "@/types/common";
-import { RewardsType, ParticpationType } from "@prisma/client";
+import { EStatus, TCreateCampaignProps } from "@/types/common";
+import { Campaign } from "@prisma/client";
+import { createClient } from "@supabase/supabase-js";
+import { v4 as uuidv4 } from "uuid";
+// Create a single supabase client for interacting with your database
+const supabase = createClient(
+    process.env.SUPABASE_URL!,
+    process.env.SUPABASE_ANON_KEY!
+);
+  
 
-type TCampaignProps = {
-  title: string;
-  description: string;
-  image: string;
-  totalWinners: number;
-  totalPrize: number;
-  campaignStartDate: Date;
-  campaginEndDate: Date;
-  rewardType: RewardsType;
-  isNative: boolean;
-  chainId: number;
-  tokenAddress?: string;
-  tokenSymbol?: string;
-  tokenName?: string;
-  particpationType: ParticpationType;
-  walletAddress: string; 
-};
+export const createCampaign = async (data: TCreateCampaignProps) => {
 
-export const createCampaign = async (data: TCampaignProps) => {
+    const imageId = uuidv4();
+    console.log({ imageId });
+  
+    const imageBlob = base64ToBlob(data.imageFile!);
+  
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from(process.env.BUCKET_NAME!)
+      .upload(imageId, imageBlob, {
+        cacheControl: "3600",
+        upsert: false,
+      });
+  
+    if (uploadError) {
+      return {
+        status: EStatus.ERROR,
+        title: "Image upload failed",
+        desciption: "Image upload failed",
+      };
+    }
   const response = await client.campaign.create({
     data: {
       title: data.title,
       description: data.description,
-      image: data.image,
+      image: uploadData?.fullPath,
       totalWinners: data.totalWinners,
       totalPrize: data.totalPrize,
       campaignStartDate: data.campaignStartDate,
@@ -37,6 +48,7 @@ export const createCampaign = async (data: TCampaignProps) => {
       tokenSymbol: data.tokenSymbol,
       tokenName: data.tokenName,
       particpationType: data.particpationType,
+      taskType: data.taskType,
       ownerId: data.walletAddress, 
     },
   });
@@ -55,3 +67,12 @@ export const createCampaign = async (data: TCampaignProps) => {
     };
   }
 };
+
+export const getCampaigns = async ():Promise<Campaign[]> => {
+    const response = await client.campaign.findMany();
+    if (response) {
+        return response;
+    } else {
+        return [];
+    }
+}
