@@ -24,7 +24,7 @@ interface Step1Props {
 }
 export function Step1({ setLoadData, loadData }: Step1Props) {
   return (
-    <div className="w-full lg:grid lg:grid-cols-2  min-h-[80vh]">
+    <div className="w-full lg:grid lg:grid-cols-2  min-h-[95vh]">
       <div className="flex items-center justify-center ">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">

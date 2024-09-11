@@ -81,7 +81,7 @@ export function Step2({ setLoadData, loadData }: Step1Props) {
     }
   };
   return (
-    <div className="w-full lg:grid min-h-[80vh] lg:grid-cols-2">
+    <div className="w-full lg:grid min-h-[95vh] lg:grid-cols-2">
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
