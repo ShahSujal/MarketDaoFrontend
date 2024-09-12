@@ -68,11 +68,17 @@ export const createCampaign = async (data: TCreateCampaignProps) => {
   }
 };
 
-export const getCampaigns = async ():Promise<Campaign[]> => {
-    const response = await client.campaign.findMany();
-    if (response) {
-        return response;
-    } else {
-        return [];
-    }
-}
+// export const getCampaigns = async ():Promise<Campaign[]> => {
+//   try {
+//     const response = await client.campaign.findMany();
+//     if (response) {
+//         return response;
+//     } else {
+//         return [];
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     return [];
+    
+//   }
+// }

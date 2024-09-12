@@ -100,7 +100,7 @@ export default function Home() {
     <Treades/>
 
 <div className=" w-full min-h-screen bg-[#00000056] flex justify-center z-10 items-center flex-col ">
- <h1 className=" text-[140px] text-[#ccc] font-medium font-fragment">Let's Connect</h1>
+ <h1 className=" text-[140px] text-[#ccc] font-medium font-fragment">Let&apos;s Connect</h1>
  <h3 className="text-[20px] text-[#717070]">
   For any further queries, feel free to reach out to us 
  </h3>

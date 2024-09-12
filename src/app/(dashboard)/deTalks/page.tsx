@@ -1,18 +1,18 @@
 "use client";
 import Detalks from '@/components/deTalks';
-import React, { useCallback } from 'react'
-import { useAccount } from 'wagmi';
+import React from 'react'
+// import { useAccount } from 'wagmi';
 
 
-const page = () => {
-  const {address} = useAccount();
+const Page = () => {
+  // const {address} = useAccount();
   return (
     <div>
-      {
-        address ? Detalks() : <div>Connect your wallet to continue</div>
-      }
+      {/* {
+        address ? <Detalks/> : <div>Connect your wallet to continue</div>
+      } */}
     </div>
   )
 }
 
-export default page
+export default Page

@@ -29,7 +29,7 @@ const InvestorUserCard = ({ investor }: Props) => {
         {
           investor.stakes.slice(0,4).map((item) => {
             return (
-              <div>
+              <div key={item.id}>
                 <Image src={chainsWithLogo.find((chainData)=>chainData.chainId === item.chainId)?.localImage || "/chain/ethereum.png"} width={30} height={30} alt="" className=" w-8 h-8 rounded-full object-cover" />
                 <span className=" text-white text-xs">{item.stake}</span>
                 

@@ -1,17 +1,17 @@
-import { getCampaigns } from '@/actions/campaign'
+// import { getCampaigns } from '@/actions/campaign'
 import React from 'react'
 
 const page = async() => {
-  const campaigns = await getCampaigns()
+  // const campaigns = await getCampaigns()
     return (
     <div className=' w-full min-h-screen flex flex-col'>
-      {
+      {/* {
         campaigns? 
         campaigns.map((item)=>{
-          return <div></div>
+          return <div key={item.id}></div>
         })
         :<div>Loading...</div>
-      }
+      } */}
     </div>
   )
 }

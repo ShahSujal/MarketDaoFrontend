@@ -3,11 +3,14 @@ import ContractedSidebar from "@/components/Sidebar/contracted-sidebar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Navbar from "@/components/others/navbar";
 import Spline from "@splinetool/react-spline";
-import { XMTPProvider } from "@xmtp/react-sdk";
+// import dynamic from "next/dynamic";
+// const XMTPProvider = dynamic(() => import("@xmtp/react-sdk").then(mod => mod.XMTPProvider), { ssr: false });
+
+
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <XMTPProvider>
+    // <XMTPProvider>
     <div className="flex h-screen relative bg-[#040015]">
       <div className="">
         <ContractedSidebar />
@@ -19,7 +22,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         </ScrollArea>
       </div>
     </div>
-    </XMTPProvider>
+    // </XMTPProvider>
   );
 };
 

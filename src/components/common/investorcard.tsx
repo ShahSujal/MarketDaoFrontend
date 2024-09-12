@@ -11,7 +11,7 @@ const InvestorCard = ({investment}: InvestmentProps) => {
   return (
     <div className=" w-[320px] h-[380px] my-4 rounded-xl mx-3 relative bg-gradient-to-br from-[#4342425b] to-[#050505bd]  items-center flex flex-col justify-start border-2 border-[#171717] backdrop-blur-lg z-10 ">
       <Image
-        src={process.env.NEXT_PUBLIC_IMAGE_URL! + investment.image}
+        src={investment.image ? process.env.NEXT_PUBLIC_IMAGE_URL! + investment.image : "/chain/ethereum.png"}
         alt=""
         width={350}
         height={450}
@@ -20,7 +20,7 @@ const InvestorCard = ({investment}: InvestmentProps) => {
       <div className=" flex flex-row justify-end  items-center absolute right-5 top-3">
        {
         investment.chainId.map((item) => {
-          return <Image src={chainsWithLogo.find((chainData)=>chainData.chainId === item )?.localImage || "/chain/ethereum.png"} width={30} height={30} alt="" className=" w-8 h-8 rounded-full object-cover" />
+          return <Image src={chainsWithLogo.find((chainData)=>chainData.chainId === item )?.localImage || "/chain/ethereum.png"} width={30} height={30} alt="" className=" w-8 h-8 rounded-full object-cover" key={item} />
         })
        }
       </div>

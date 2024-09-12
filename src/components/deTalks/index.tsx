@@ -10,11 +10,14 @@ import {
   useCanMessage,
   useStartConversation,
   Signer,
-  isValidAddress
+  isValidAddress,
+  useSendMessage,
+  Conversation,
+  useStreamConversations
 } from "@xmtp/react-sdk";
 import { Button } from "../ui/button";
 import { loadKeys, storeKeys } from "@/lib/xmtpKeys";
-import { isAddress } from "viem";
+import { Address, isAddress } from "viem";
 const Detalks = () => {
   const { client, initialize } = useClient();
   const { data: walletClient } = useWalletClient();
@@ -23,6 +26,7 @@ const Detalks = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { conversations } = useConversations();
   const [message, setMessage] = useState("");
+  const { sendMessage } = useSendMessage();
   console.log(conversations, "conversations");
 
   const { startConversation } = useStartConversation();
@@ -116,7 +120,15 @@ const Detalks = () => {
     [message, peerAddress, startConversation],
   );
 
+  const handleSendMessage = async () => {
+    if (peerAddress && message) {
+      setIsLoading(true);
+      const add = await peerAddress as Address
+      await sendMessage(conversations[0], message);
+      setIsLoading(false);
+  }
 
+  }
   const handleCheckAddress = useCallback(async () => {
     // e.preventDefault();
     console.log("checkAddress", peerAddress);
@@ -134,9 +146,21 @@ const Detalks = () => {
       
       setIsOnNetwork(false);
     }
-  }, [peerAddress]);
+  }, [peerAddress, canMessage, isOnNetwork]);
 //   void checkAddress();
-
+  // track streamed conversations
+  const [streamedConversations, setStreamedConversations] = useState<
+    Conversation[]
+  >([]);
+ 
+  // callback to handle incoming conversations
+  const onConversation = useCallback(
+    (conversation: Conversation) => {
+      setStreamedConversations((prev) => [...prev, conversation]);
+    },
+    [],
+  );
+  // const { error } = useStreamConversations(onConversation);
 
 
   return (
@@ -144,7 +168,7 @@ const Detalks = () => {
       <Button onClick={() => handleConnect()}>Connect</Button>
       <Button onClick={() => checkUserCanMessage()}>Message</Button>
       <Button onClick={() => handleCheckAddress()}>check address</Button>
-      <Button onClick={() => handleStartConversation()}>sendMessage</Button>
+      <Button onClick={() => handleSendMessage()}>sendMessage</Button>
       
 
       <form onSubmit={handleStartConversation} className=" flex flex-col h-[450px] w-full justify-evenly items-center">
