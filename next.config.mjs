@@ -18,14 +18,7 @@ const nextConfig = {
         pathname: '**',  // Allow any pathname
       },
     ],
-  },
-
-  // Enable experimental features if needed in future
-  experimental: {
-    esmExternals: false,  // Use ESM external modules (set to `false` as default)
-    // Optionally enable asyncWebAssembly for WASM support if needed
-    // asyncWebAssembly: true,  
-  },
+  }
 };
 
 export default nextConfig;

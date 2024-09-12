@@ -6,10 +6,9 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
-import { creationType, LoadDataType } from "./page";
 import { toast } from "@/components/ui/use-toast";
 import { createInvestment } from "@/actions/investor";
-import { EStatus, TApiResponse } from "@/types/common";
+import { EStatus, LoadDataType, TApiResponse } from "@/types/common";
 import { useAccount } from "wagmi";
 import { createInvestmentFunction } from "@/contract/helpers/investorContract";
 

@@ -1,0 +1,153 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+  ADMINREMOVED
+}
+
+enum CampaignStatus {
+  NOTSTARTED
+  STARTED
+  ENDED
+  REWARDSDISTRIBUTED
+  ADMINREMOVED
+}
+
+enum RewardsType {
+  NOTSTARTED
+  STARTED
+  ENDED
+  REWARDSDISTRIBUTED
+  ADMINREMOVED
+}
+
+enum TaskType {
+  YOUTUBEVIDEO
+  YOUTUBESHORT
+  TWITTERTWEET
+  TWITTERPOST
+}
+
+enum ParticpationType {
+  EVERYONE
+  PERMITED
+}
+
+model User {
+  walletAddress   String             @id
+  name            String?
+  bio             String?
+  image           String?
+  investments     Investment[]
+  pitches         Pitch[]
+  stakes          Stake[]
+  liquiditys      CurrentLiquidity[]
+  campaigns       Campaign[]
+  winnedCampaigns Campaign[]         @relation("CampaignWinners")
+  discord         String?
+  twitter         String?
+  opensea         String?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+}
+
+model Pitch {
+  id                     String     @id @default(uuid())
+  userId                 String
+  user                   User       @relation(fields: [userId], references: [walletAddress])
+  investmentId           String
+  investment             Investment @relation(fields: [investmentId], references: [id])
+  title                  String
+  description            String
+  deadline               DateTime
+  initialInvestment      Int
+  profitAmountEstimation Int
+  isNative               Boolean
+  investmentTokenAddress String?
+  profitPercentageAmount Int
+  chainId                Int
+  isExecuted             Boolean
+  voteFor                Int        @default(0)
+  voteAgainst            Int        @default(0)
+  totalVoters            Int        @default(0)
+  Status                 Status     @default(ACTIVE)
+  createdAt              DateTime   @default(now())
+  updatedAt              DateTime   @updatedAt
+}
+
+model Stake {
+  id           String     @id @default(uuid())
+  userId       String
+  user         User       @relation(fields: [userId], references: [walletAddress])
+  investmentId String
+  investment   Investment @relation(fields: [investmentId], references: [id])
+  stake        Int
+  chainId      Int
+  createdAt    DateTime   @default(now())
+}
+
+model Investment {
+  id           String   @id @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [walletAddress])
+  accounts     String[] @default([])
+  partners     Stake[]
+  title        String
+  description  String
+  image        String
+  tokenAddress String
+  tokenSymbol  String
+  tokenName    String
+  pitches      Pitch[]
+  chainId      Int[]    @default([])
+  status       Status   @default(ACTIVE)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model CurrentLiquidity {
+  id           String  @id @default(uuid())
+  userId       String
+  user         User    @relation(fields: [userId], references: [walletAddress])
+  tokenAddress String?
+  isNative     Boolean
+  amount       Int
+}
+
+model Campaign {
+  id                String           @id @default(uuid())
+  ownerId           String
+  owner             User             @relation(fields: [ownerId], references: [walletAddress])
+  title             String
+  description       String
+  image             String
+  totalWinners      Int
+  totalPrize        Int
+  campaignStartDate DateTime
+  campaginEndDate   DateTime
+  campaignWinners   User[]           @relation("CampaignWinners")
+  rewardType        RewardsType
+  isNative          Boolean
+  chainId           Int
+  tokenAddress      String?
+  tokenSymbol       String?
+  tokenName         String?
+  campaignPostImage String?
+  campaignPostLink  String?
+  campaignPostVideo String?
+  taskType          TaskType
+  particpationType  ParticpationType
+  status            CampaignStatus   @default(NOTSTARTED)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+}

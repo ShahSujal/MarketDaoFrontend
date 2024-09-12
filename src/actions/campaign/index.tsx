@@ -1,7 +1,7 @@
 import { base64ToBlob } from "@/lib/actions";
 import { client } from "@/lib/config/prismaconfig";
 import { EStatus, TCreateCampaignProps } from "@/types/common";
-import { Campaign } from "@prisma/client";
+// import { Campaign } from "@prisma/client";
 import { createClient } from "@supabase/supabase-js";
 import { v4 as uuidv4 } from "uuid";
 // Create a single supabase client for interacting with your database

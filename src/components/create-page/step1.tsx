@@ -3,10 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
-import { creationType, LoadDataType } from "./page";
 import {
   Select,
   SelectContent,
@@ -17,6 +14,7 @@ import {
   SelectLabel,
 } from "@/components/ui/select";
 import { toast } from "@/components/ui/use-toast";
+import { LoadDataType } from "@/types/common";
 
 interface Step1Props {
   setLoadData: React.Dispatch<React.SetStateAction<LoadDataType>>;

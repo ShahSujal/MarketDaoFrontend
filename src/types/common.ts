@@ -1,4 +1,5 @@
 import { ParticpationType, RewardsType, Status, TaskType } from "@prisma/client";
+import { creationType } from "./enum";
 
 export enum EStatus {
   LOADING = "loading",
@@ -100,3 +101,13 @@ export type TCreateCampaignProps = {
   walletAddress: string; 
   imageFile?: string;
 };
+export interface LoadDataType {
+  creationType: creationType;
+  step: number;
+  title: string;
+  description: string;
+  image: string;
+  tokenName: string;
+  tokenSymbol: string;
+  chainId: number[];
+}
