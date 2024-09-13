@@ -27,8 +27,8 @@ export function Step({ setLoadData, loadData }: StepProps) {
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
           <div className="grid gap-2 text-center">
-            <h1 className="text-3xl font-bold text-gray-100"> Create what&apos;s make you profit </h1>
-            <p className="text-balance text-muted-foreground">
+            <h1 className="text-2xl font-bold font-fragment text-gray-100"> Create what&apos;s make you profit </h1>
+            <p className="text-balance text-sm text-muted-foreground">
               Choose the type of creation you want to create.
             </p>
           </div>
@@ -48,8 +48,8 @@ export function Step({ setLoadData, loadData }: StepProps) {
                   width={500}
                   height={500}
                   className={cn(
-                    "w-full h-full object-cover transition rounded-2xl absolute left-0 top-0 opacity-50",
-                    loadData.creationType === item.title && "opacity-70"
+                    "w-full h-full object-cover transition rounded-2xl absolute left-0 top-0 opacity-30",
+                    loadData.creationType === item.title && "opacity-90"
                   )}
                 />
                 <h1 className="text-[34px] font-medium font-fragment z-10 text-gray-100">

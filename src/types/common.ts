@@ -111,3 +111,10 @@ export interface LoadDataType {
   tokenSymbol: string;
   chainId: number[];
 }
+export type TUpdateUserDetails = {
+  walletAddress: `0x${string}`;
+  username: string;
+  bio: string;
+  image: string;
+  imageFile?: File;
+}

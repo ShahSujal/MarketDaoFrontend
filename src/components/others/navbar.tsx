@@ -7,16 +7,19 @@ import { createUser } from "@/actions/user";
 import { chainsWithLogo } from "@/constants";
 import Image from "next/image";
 import CustomButton from "../common/customButton";
+import { useAtom, useSetAtom } from "jotai";
+import { userAtom } from "@/services/jotai/atom";
 type Props = {};
 
 const Navbar = (props: Props) => {
   const { open, close } = useWeb3Modal();
   const { address, chainId, chain } = useAccount();
+  const [,setUser] = useAtom(userAtom);
   useEffect(() => {
     if (address) {
       const create = async () => {
         const user = await createUser(address);
-        console.log(user);
+        setUser(user);
       };
       create();
     }
