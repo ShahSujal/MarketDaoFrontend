@@ -1,6 +1,9 @@
 import { ParticpationType, RewardsType, Status, TaskType } from "@prisma/client";
 import { creationType } from "./enum";
-
+import { Address } from "viem";
+import type {
+  CachedConversation
+} from "@xmtp/react-sdk";
 export enum EStatus {
   LOADING = "loading",
   ERROR = "error",
@@ -117,4 +120,8 @@ export type TUpdateUserDetails = {
   bio: string;
   image: string;
   imageFile?: File;
+}
+export type TPeerType = {
+  peerAddress: Address | undefined;
+  conversation: CachedConversation | undefined;
 }

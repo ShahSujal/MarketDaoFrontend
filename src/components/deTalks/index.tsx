@@ -1,172 +1,183 @@
 "use client";
-import React, { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
-import { useAccount, useConnect, useWalletClient } from "wagmi";
+import React, {
+  useEffect,
+  useState,
+} from "react";
+import { useAccount, useWalletClient } from "wagmi";
 import {
   Client,
-  useStreamMessages,
   useClient,
-  useMessages,
   useConversations,
-  useCanMessage,
-  useStartConversation,
-  // Signer,
-  isValidAddress,
-  useSendMessage,
-  // Conversation,
-  useStreamConversations
 } from "@xmtp/react-sdk";
-import { Button } from "../ui/button";
+import type {
+  CachedConversation,
+  Signer
+} from "@xmtp/react-sdk";
 import { loadKeys, storeKeys } from "@/lib/xmtpKeys";
-import { Address, isAddress } from "viem";
+import { Address } from "viem";
+import UserConversations from "./conversations";
+import UserMessages from "./conversations/messages";
+import { TPeerType } from "@/types/common";
+
+
+
 const Detalks = () => {
-//   const { client, initialize } = useClient();
-//   const { data: walletClient } = useWalletClient();
-//   const [peerAddress, setPeerAddress] = useState("");
-//   const [isOnNetwork, setIsOnNetwork] = useState(false);
-//   const [isLoading, setIsLoading] = useState(false);
-//   const { conversations } = useConversations();
-//   const [message, setMessage] = useState("");
-//   const { sendMessage } = useSendMessage();
-//   console.log(conversations, "conversations");
+  const { client, initialize } = useClient();
+  const { data: walletClient } = useWalletClient();
+  const [activePeer, setActivePeer] = useState<TPeerType>({
+    peerAddress: undefined,
+    conversation: undefined,
+  })
+  const { chainId, address } = useAccount()
+  const handleConnect = async () => {
+    if (!address || !walletClient) {
+      return;
+    }
+    const signer = walletClient as unknown as Signer;
+    if (!signer) {
+      return;
+    }
+    let keys = loadKeys(address);
+    if (!keys) {
+      keys = await Client.getKeys(signer, {
+        env: "dev",
+        persistConversations: false,
+        skipContactPublishing: true,
+      });
+      storeKeys(address, keys);
+    }
 
-//   const { startConversation } = useStartConversation();
-//   const { canMessage } = useCanMessage();
+    await initialize({
+      signer: walletClient as unknown as Signer,
+      options: {
+        env: "dev",
+        persistConversations: false,
+      },
+      keys,
+    });
+  };
+  useEffect(() => {
+   if (!client && walletClient && address) {
+    handleConnect();
+   }
+  }, [client, walletClient, address]);
+  //   const checkUserCanMessage = async () => {
+  //     // Start a conversation with XMTP
+  //     if (!address) {
+  //       return;
+  //     }
+  //     const add = address;
+  //     console.log("checkmessage");
+  //     // console.log(canMessage(add)); // false
+  //     console.log("checkmessage");
+  //     const msg = await canMessage(add);
+  //     console.log("msg", msg);
+  //     // if (await canMessage(add)) {
+  //     //   const conversation = await startConversation(add, "hi");
+  //     //   console.log("conversation", conversation);
+  //     // }
+  //   };
+  //   // const { messages } = useMessages(conversation);
+
+  //   const handleAddressChange = useCallback(
+  //     (e: ChangeEvent<HTMLInputElement>) => {
+  //       console.log("address", e.target.value);
+
+  //       setPeerAddress(e.target.value);
+  //     },
+  //     [],
+  //   );
+  //    const handleMessageChange = useCallback(
+  //     (e: ChangeEvent<HTMLInputElement>) => {
+  //       setMessage(e.target.value);
+  //     },
+  //     [],
+  //   );
+
+  //   const handleStartConversation = useCallback(
+  //     async () => {
+  //       if (peerAddress && message) {
+  //         setIsLoading(true);
+  //         const conversation = await startConversation(peerAddress, message);
+  //         setIsLoading(false);
+  //       }
+  //     },
+  //     [message, peerAddress, startConversation],
+  //   );
+
+  //   const handleSendMessage = async () => {
+  //     if (peerAddress && message) {
+  //       setIsLoading(true);
+  //       const add = await peerAddress as Address
+  //       await sendMessage(conversations[0], message);
+  //       setIsLoading(false);
+  //   }
+
+  //   }
+  //   const handleCheckAddress = useCallback(async () => {
+  //     // e.preventDefault();
+  //     console.log("checkAddress", peerAddress);
+
+  //     if (isValidAddress(peerAddress)) {
+  //       console.log("valid address", peerAddress);
+
+  //       setIsLoading(true);
+  //       setIsOnNetwork(await canMessage(peerAddress));
+  //       console.log("isOnNetwork", isOnNetwork);
+
+  //       setIsLoading(false);
+  //     } else {
+  //       console.log("invalid address" , peerAddress);
+
+  //       setIsOnNetwork(false);
+  //     }
+  //   }, [peerAddress, canMessage, isOnNetwork]);
+  // //   void checkAddress();
+  //   // track streamed conversations
   
-//   // const { data: walletClient, isLoading, error:walletClientError } = useWalletClient();
-//   const { chainId, address } = useAccount();
 
-//   console.log(walletClient, "walletClient");
-//   console.log(client, "client");
+  //   // callback to handle incoming conversations
+  //   const onConversation = useCallback(
+  //     (conversation: Conversation) => {
+  //       setStreamedConversations((prev) => [...prev, conversation]);
+  //     },
+  //     [],
+  //   );
+  //   // const { error } = useStreamConversations(onConversation);
 
-//   const handleConnect = async () => {
-//     console.log("walletClient", walletClient);
-//     console.log("intialization started");
-//     if (!address) {
-//       return;
-//     }
-//     if (!walletClient) {
-//       console.log("walletClient not found", walletClient);
+  // const conversation = await client.conversations.list()
+  // console.log(conversation, "conversation");
 
-//       return;
-//     }
-//     const signer = walletClient as unknown as Signer;
-//     let keys = loadKeys(address);
-//     console.log("load keys", keys);
-    
-//     if (!keys) {
-//       console.log("keys not found", keys);
-//       keys = await Client.getKeys(signer, {
-//         env: "dev",
-//         persistConversations: false,
-//         skipContactPublishing: true,
-//       });
-//       storeKeys(address, keys);
-//     }
-
-//     await initialize({
-//       signer: walletClient as unknown as Signer,
-//       options: {
-//         env: "dev",
-//         persistConversations: false,
-//       },
-//       keys,
-//     });
-//     console.log("intialization done");
-//   };
-
-//   const checkUserCanMessage = async () => {
-//     // Start a conversation with XMTP
-//     if (!address) {
-//       return;
-//     }
-//     const add = address;
-//     console.log("checkmessage");
-//     // console.log(canMessage(add)); // false
-//     console.log("checkmessage");
-//     const msg = await canMessage(add);
-//     console.log("msg", msg);
-//     // if (await canMessage(add)) {
-//     //   const conversation = await startConversation(add, "hi");
-//     //   console.log("conversation", conversation);
-//     // }
-//   };
-//   // const { messages } = useMessages(conversation);
+  
+  // for (const conversation of await client?.conversations.list()) {
+  //   // All parameters are optional and can be omitted
+  //   const messagesInConversation = await conversation.messages(
+  //     {
+  //     checkAddresses: true,  
+  //     }
+  //   );
+  //   console.log(messagesInConversation, "messagesInConversation");
+  // }
 
 
-
-//   const handleAddressChange = useCallback(
-//     (e: ChangeEvent<HTMLInputElement>) => {
-//       console.log("address", e.target.value);
-      
-//       setPeerAddress(e.target.value);
-//     },
-//     [],
-//   ); 
-//    const handleMessageChange = useCallback(
-//     (e: ChangeEvent<HTMLInputElement>) => {
-//       setMessage(e.target.value);
-//     },
-//     [],
-//   );
- 
-//   const handleStartConversation = useCallback(
-//     async () => {
-//       if (peerAddress && message) {
-//         setIsLoading(true);
-//         const conversation = await startConversation(peerAddress, message);
-//         setIsLoading(false);
-//       }
-//     },
-//     [message, peerAddress, startConversation],
-//   );
-
-//   const handleSendMessage = async () => {
-//     if (peerAddress && message) {
-//       setIsLoading(true);
-//       const add = await peerAddress as Address
-//       await sendMessage(conversations[0], message);
-//       setIsLoading(false);
-//   }
-
-//   }
-//   const handleCheckAddress = useCallback(async () => {
-//     // e.preventDefault();
-//     console.log("checkAddress", peerAddress);
-    
-//     if (isValidAddress(peerAddress)) {
-//       console.log("valid address", peerAddress);
-      
-//       setIsLoading(true);
-//       setIsOnNetwork(await canMessage(peerAddress));
-//       console.log("isOnNetwork", isOnNetwork);
-      
-//       setIsLoading(false);
-//     } else {
-//       console.log("invalid address" , peerAddress);
-      
-//       setIsOnNetwork(false);
-//     }
-//   }, [peerAddress, canMessage, isOnNetwork]);
-// //   void checkAddress();
-//   // track streamed conversations
-//   const [streamedConversations, setStreamedConversations] = useState<
-//     Conversation[]
-//   >([]);
- 
-//   // callback to handle incoming conversations
-//   const onConversation = useCallback(
-//     (conversation: Conversation) => {
-//       setStreamedConversations((prev) => [...prev, conversation]);
-//     },
-//     [],
-//   );
-//   // const { error } = useStreamConversations(onConversation);
-
-
+  // const { error, messages, isLoading } = useMessages(conversations[0],{
+  //       onError: (error) => {
+  //           console.log("error", error);
+  //       },
+  //       onMessages: (message) => {
+  //           console.log("message", message);
+  //           // setStreamedMessages((prev) => [...prev, message]);
+  //       },
+  //   });
   return (
-    <div className=" w-full min-h-screen flex flex-col justify-center items-center">
-      
+    <div className=" w-full min-h-[80vh] flex flex-row ">
+  {  
+    client && <UserConversations checkPeerDetails={setActivePeer}/>
+  }
+  {  
+    client && activePeer.conversation && activePeer.peerAddress ? <UserMessages conversation={activePeer.conversation} peerAddress={activePeer.peerAddress}/> : <div className=" w-full h-[93vh] flex justify-center items-center"> <h1 className="text-2xl text-gray-700">Tap to select user to start conversation</h1></div>
+  }
     </div>
-  );
-};
+  )
+}
 export default Detalks;
