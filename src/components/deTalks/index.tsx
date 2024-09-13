@@ -18,6 +18,7 @@ import { Address } from "viem";
 import UserConversations from "./conversations";
 import UserMessages from "./conversations/messages";
 import { TPeerType } from "@/types/common";
+import ConversationSkeleton from "./conversations/conversationSkeleton";
 
 
 
@@ -172,10 +173,10 @@ const Detalks = () => {
   return (
     <div className=" w-full min-h-[80vh] flex flex-row ">
   {  
-    client && <UserConversations checkPeerDetails={setActivePeer}/>
+    client ? <UserConversations checkPeerDetails={setActivePeer}/> : <ConversationSkeleton/>
   }
   {  
-    client && activePeer.conversation && activePeer.peerAddress ? <UserMessages conversation={activePeer.conversation} peerAddress={activePeer.peerAddress}/> : <div className=" w-full h-[93vh] flex justify-center items-center"> <h1 className="text-2xl text-gray-700">Tap to select user to start conversation</h1></div>
+    client && activePeer.conversation && activePeer.peerAddress ? <UserMessages conversation={activePeer.conversation} peerAddress={activePeer.peerAddress}/> : <div className=" w-[calc(100%-450px)] h-[93vh] flex justify-center items-center"> <h1 className="text-2xl text-gray-700">Tap to select user to start conversation</h1></div>
   }
     </div>
   )
