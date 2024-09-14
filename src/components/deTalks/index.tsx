@@ -1,5 +1,6 @@
 "use client";
 import React, {
+  useCallback,
   useEffect,
   useState,
 } from "react";
@@ -30,7 +31,7 @@ const Detalks = () => {
     conversation: undefined,
   })
   const { chainId, address } = useAccount()
-  const handleConnect = async () => {
+  const handleConnect = useCallback(async () => {
     if (!address || !walletClient) {
       return;
     }
@@ -56,12 +57,13 @@ const Detalks = () => {
       },
       keys,
     });
-  };
+  }, [address, walletClient, initialize]);
+
   useEffect(() => {
    if (!client && walletClient && address) {
     handleConnect();
    }
-  }, [client, walletClient, address]);
+  }, [client, walletClient, address, handleConnect]);
   //   const checkUserCanMessage = async () => {
   //     // Start a conversation with XMTP
   //     if (!address) {
