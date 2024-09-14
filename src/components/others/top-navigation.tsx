@@ -8,7 +8,7 @@ type Props = {};
 
 const TopNavigation = (props: Props) => {
   return (
-    <div className=" w-full h-14 flex bg-gradient-to-br from-[#64636328] to-[#fffdfd18] justify-between items-center px-4 rounded-3xl backdrop-blur-sm">
+    <div className=" w-full h-14 flex mt-[50px] bg-gradient-to-br from-[#64636328] to-[#fffdfd18] justify-between items-center px-4 rounded-3xl backdrop-blur-sm">
       <div
         className="flex items-center gap-2 font-paps flex-row font-medium text-xl text-[#aba8a8]  md:text-base"
       >
