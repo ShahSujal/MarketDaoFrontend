@@ -13,7 +13,6 @@ const ConversationSkeleton = (props: Props) => {
           className="flex flex-row w-full my-3 h-16 rounded-lg px-2  hover:bg-[#ffffff5e] justify-between items-center cursor-pointer"
           key={conversation}
         >
-          
         </Skeleton>
       );
     })}

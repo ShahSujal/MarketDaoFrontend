@@ -1,7 +1,7 @@
 import { Address } from "viem";
 
 export const walletAddressShortn = (address: Address)=>{
-    return `${address.slice(0, 4)}....${address.slice(-4)}`
+    return `${address.slice(0, 6)}....${address.slice(-4)}`
 }
 
 // Utility function to convert Base64 to Blob

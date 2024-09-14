@@ -73,7 +73,7 @@ export const updateUser = async ({walletAddress, username, image, bio}: TUpdateU
         data:{
             name: username,
             bio: bio,
-            image: image
+            image: imageId
         }
     })
     if (!response) {
