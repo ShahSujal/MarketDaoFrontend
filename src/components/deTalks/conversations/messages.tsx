@@ -49,7 +49,7 @@ const UserMessages = ({ peerAddress }: Props) => {
       setMessages(messagesInConversation);
     };
     getUserChats();
-  }, [peerAddress, setMessages]);
+  }, [peerAddress, setMessages, client]);
 
   const submitMessage = async () => {
    // await sendMessage(conversations[0], message); 

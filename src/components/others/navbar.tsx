@@ -23,7 +23,7 @@ const Navbar = (props: Props) => {
       };
       create();
     }
-  }, [address]);
+  }, [address, setUser]);
 
   return (
     <nav className=" flex justify-end items-center w-full h-[44px] px-6">

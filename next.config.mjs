@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Custom Webpack configuration
+
+  experimental: {
+    serverComponentsExternalPackages: ["@xmtp/user-preferences-bindings-wasm"],
+  },
   webpack: (config) => {
+    
     // Add external dependencies to avoid bundling them
     config.externals.push('pino-pretty', 'lokijs', 'encoding');
     
