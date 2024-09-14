@@ -11,13 +11,17 @@ import {
 } from "@/components/ui/carousel";
 import { walletAddressShortn } from "@/lib/actions";
 import { userAtom } from "@/services/jotai/atom";
+import { TInvestorDetails } from "@/types/common";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { useAtom } from "jotai";
 import Image from "next/image";
 import React from "react";
+import { Address } from "viem";
 import { useAccount } from "wagmi";
 
-type Props = {};
+type Props = {
+   userInfo: TInvestorDetails;
+};
 
 const Dashboard = (props: Props) => {
 const [user] = useAtom(userAtom)
@@ -42,7 +46,7 @@ const [user] = useAtom(userAtom)
           className=" w-[250px] h-[250px]  grayscale  transition group-hover:grayscale-0 object-cover rounded-full my-4 mx-4"
         />
         <div className=" w-2/5 h-[250px] flex justify-center z-10 mx-4 items-start flex-col">
-          <h1 className=" text-3xl font-paps font-bold text-white">{user?.name}</h1>
+          <h1 className=" text-3xl font-paps font-bold text-white">{user?.name || walletAddressShortn(props.userInfo.walletAddress as Address)}</h1>
           <h1 className=" text-lg font-paps font-medium text-gray-200 ">
             {
               user?.bio ? user.bio : `Hey there! My name is ${user?.name ?? "hello"} and I am a creator on Tempo.`

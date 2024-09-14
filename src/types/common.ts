@@ -1,4 +1,4 @@
-import { ParticpationType, RewardsType, Status, TaskType } from "@prisma/client";
+import { Campaign, CurrentLiquidity, Investment, ParticpationType, Pitch, RewardsType, Stake, Status, TaskType, User } from "@prisma/client";
 import { creationType } from "./enum";
 import { Address } from "viem";
 import type {
@@ -31,55 +31,39 @@ export type TInvestmentMonthlyData = {
   }[];
 };
 
-export type TInvestorIdProps = {
-  id: string;
-  userId: string;
-  accounts: string[];
-  title: string;
-  description: string;
-  partners: Stake[];
-  image: string;
-  tokenAddress: string;
-  tokenSymbol: string;
-  tokenName: string;
-  chainId: number[];
-  status: Status;
-  createdAt: Date;
-  updatedAt: Date;
-  user: {
-    walletAddress: string;
-    name: string | null;
-    bio: string | null;
-    image: string | null;
-    discord: string | null;
-    twitter: string | null;
-    opensea: string | null;
-    createdAt: Date;
-    updatedAt: Date;
-  };
+// export type TInvestorIdProps = {
+//   id: string;
+//   userId: string;
+//   accounts: string[];
+//   title: string;
+//   description: string;
+//   partners: Stake[];
+//   image: string;
+//   tokenAddress: string;
+//   tokenSymbol: string;
+//   tokenName: string;
+//   chainId: number[];
+//   status: Status;
+//   createdAt: Date;
+//   updatedAt: Date;
+//   user: {
+//     walletAddress: string;
+//     name: string | null;
+//     bio: string | null;
+//     image: string | null;
+//     discord: string | null;
+//     twitter: string | null;
+//     opensea: string | null;
+//     createdAt: Date;
+//     updatedAt: Date;
+//   };
+// };
+
+export type TInvestorIdProps = Investment & {
+  user: User;
+  partners: User[];
 };
 
-
-type User = {
-  walletAddress: string;
-  name: string | null;
-  bio: string | null;
-  image: string | null;
-  discord: string | null;
-  twitter: string | null;
-  opensea: string | null;
-  createdAt: Date;
-  updatedAt: Date;
-};
-
-type Stake = {
-  id: string;
-  userId: string;
-  investmentId: string;
-  stake: number;
-  chainId: number;
-  createdAt: Date;
-};
 
 export type TInvestorStake = (User & {
   stakes: Stake[];
@@ -125,3 +109,12 @@ export type TPeerType = {
   peerAddress: Address | undefined;
   conversation: CachedConversation | undefined;
 }
+
+export type TInvestorDetails = User & {
+  investments: Investment[];
+  stakes: Stake[];
+  campaigns: Campaign[];
+  liquiditys: CurrentLiquidity[];
+  pitches: Pitch[];
+  winnedCampaigns: Campaign[];
+};

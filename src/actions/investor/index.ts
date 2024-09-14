@@ -97,16 +97,19 @@ export const getInvestmentById = async (
       id: id,
     },
     include: {
+      pitches: true,
       user: true,
-      partners: true, // Add the 'partners' property
-    },
+      partners: true, 
+    }
   });
+
   if (response) {
-    return response;
+    return response as TInvestorIdProps;
   } else {
     return {} as TInvestorIdProps;
   }
 };
+
 export const getPitchesByInvestorAndMonth = async (
   investorId: string
 ): Promise<TInvestmentMonthlyData> => {

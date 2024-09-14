@@ -74,9 +74,6 @@ const ProfileEdit = (props: Props) => {
 
   return (
     <div className=" flex flex-row z-10">
-      <button className="w-44 h-9 relative rounded-full text-gray-50 font-bold bg-gradient-to-tr from-[#d3c9e3] to-[#ff7aa6]font-fragment font-fragment flex justify-center items-center backdrop-blur-xl mx-2">
-        message investor
-      </button>
       <button className="w-44 h-9 relative rounded-full text-gray-50 font-bold bg-gradient-to-tr from-[#d3c9e3] to-[#ff7aa6]font-fragment font-fragment flex justify-center items-center backdrop-blur-xl mx-2" onClick={()=>{
         setDisplay((prev)=>{
          return !prev

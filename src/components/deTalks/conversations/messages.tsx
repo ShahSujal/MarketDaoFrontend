@@ -27,7 +27,7 @@ type Props = {
   conversation: CachedConversation;
 };
 
-const UserMessages = ({ peerAddress }: Props) => {
+const UserMessages = ({ peerAddress, conversation }: Props) => {
   const { client } = useClient();
   const [message, setMessage] = useState<string>()
   const [messages, setMessages] = useState<DecodedMessage[]>([]);
@@ -39,24 +39,35 @@ const UserMessages = ({ peerAddress }: Props) => {
   // const { startConversation } = useSendMessage();
   // console.log(conversations, "conversations");
 
+//  the infinite loop is caused by the useMessages hook
+//   const { error, messages:data, isLoading } = useMessages(conversation,{
+//     onError: (error) => {
+//         console.log("error", error);
+//     },
+//     onMessages: (message) => {
+//         console.log("message", message);
+//         // setStreamedMessages((prev) => [...prev, message]);
+//     },
+// });
 
+const getUserChats = useCallback(async() => {
+  if (!client) return;
+  const cons = await client?.conversations.newConversation(peerAddress);
+  const messagesInConversation = await cons?.messages();
+  setMessages(messagesInConversation);
+  },
+  [client, peerAddress, setMessages],
+)
 
   useEffect(() => {
-    const getUserChats = async () => {
-      if (!client) return;
-      const cons = await client?.conversations.newConversation(peerAddress);
-      const messagesInConversation = await cons?.messages();
-      setMessages(messagesInConversation);
-    };
     getUserChats();
   }, [peerAddress, setMessages, client]);
 
   const submitMessage = async () => {
-   // await sendMessage(conversations[0], message); 
+   await sendMessage(conversation, message); 
+   getUserChats()
+   setMessage("")
   }
-
-  console.log(messages, "messages");
-
   return (
     <div className=" w-[calc(100%-400px)] h-[calc(100vh-30px)]  flex flex-col px-4 justify-center items-center">
       <div className=" w-full h-16 border-b-2  flex flex-row justify-between items-center ">
@@ -89,8 +100,10 @@ const UserMessages = ({ peerAddress }: Props) => {
       </ScrollArea>
 
       <div className=" h-24 w-full flex-row flex justify-center items-center my-3">
-        <Input type="text" className=" w-10/12 mx-3" onChange={(e)=>setMessage(e.target.value)}  placeholder="Type a message" />
-         <Button>Send</Button>
+        <Input type="text" className=" w-10/12 mx-3" onChange={(e)=>setMessage(e.target.value)}  placeholder="Type a message"  />
+         <Button onClick={()=>{
+          submitMessage()
+         }}>Send</Button>
       </div>
     </div>
   );

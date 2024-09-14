@@ -7,6 +7,7 @@ import { chainsWithLogo } from "@/constants";
 import { Button } from "../ui/button";
 import { walletAddressShortn } from "@/lib/actions";
 import { Address } from "viem";
+import Link from "next/link";
 
 type Props = {
   investor: TInvestorStake;
@@ -30,7 +31,8 @@ const InvestorUserCard = ({ investor }: Props) => {
       
       <div className=" h-16 w-full relative flex justify-center items-center">
          <Image src={"/content/circuits-mobile.webp"} width={1080} height={1080} alt="" className=" w-full h-16 absolute rounded-xl object-cover" />
-         <Button className=" w-36 h-8 bg-[#0000001a] text-white backdrop-blur-sm">View</Button>
+<Link href={`/investors/${investor.walletAddress}`}>
+<Button className=" w-36 h-8 bg-[#0000001a] text-white backdrop-blur-sm">View</Button></Link>
       </div>
       <div className=" flex flex-row justify-end items-center absolute z-10 right-5 top-3">
         {

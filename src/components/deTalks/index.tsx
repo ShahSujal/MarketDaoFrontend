@@ -163,15 +163,9 @@ const Detalks = () => {
   // }
 
 
-  // const { error, messages, isLoading } = useMessages(conversations[0],{
-  //       onError: (error) => {
-  //           console.log("error", error);
-  //       },
-  //       onMessages: (message) => {
-  //           console.log("message", message);
-  //           // setStreamedMessages((prev) => [...prev, message]);
-  //       },
-  //   });
+
+
+
   return (
     <div className=" w-full min-h-[80vh] flex flex-row ">
   {  
