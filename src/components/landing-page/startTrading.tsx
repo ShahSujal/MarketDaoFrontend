@@ -5,7 +5,7 @@ type Props = {}
 
 const StartTrading = (props: Props) => {
   return (
-    <section className='w-full h-[130vh] bg-[#040015]'>
+    <section className='w-full h-[110vh] bg-[#040015]'>
             <Spline scene={process.env.NEXT_PUBLIC_SPLINE_START_EARNING!} className='h-full w-full' />
       </section>
   )

@@ -15,22 +15,38 @@ const CardSlide = () => {
     offset: ["0 0", "1 1"],
   });
   const mainDivTrans2 = useTransform(mainDivYProgess, [1, 0], ["0%", "200%"]);
-
+const data = [
+  {
+    key: 1,
+    title: "Create Dapp",
+    description: "Create your own dapp and earn cryptos",
+  },
+  {
+    key: 2,
+    title: "Social Campaign",
+    description: "Earn rewards by brannd promotions",
+  },
+  {
+    key: 3,
+    title: "Pitch Deck",
+    description: "Create your own pitch deck and earn rewards",
+  },
+]
   return (
-    <div ref={mainDivRef} className="relative h-[300vh] max-md:h-[700vh] bg-[#040015] ">
+    <div ref={mainDivRef} className="relative h-[300vh]  max-md:h-[700vh] bg-[#040015] ">
       <div className="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden">
       <div className="absolute top-1/3 left-1/3 w-64 h-44 bg-gradient-to-tr blur-[120px] from-[#fcfcff] to-[#eef6fc]"></div>
-        <div className="relative flex h-screen w-full backdrop-blur-lg overflow-hidden ">
+        <div className="relative flex h-screen max-sm:pl-[100vw] w-full backdrop-blur-lg overflow-hidden ">
           <motion.div
             style={{
               x: mainDivTrans2,
             }}
             className="absolute left-0 top-0 flex h-full w-full items-center justify-end"
           >
-            {[0,1,2,3].map((item) => {
+            {data.map((item) => {
                 return (
                   <div
-                    key={item}
+                    key={item.key}
                     className="w-full h-full max-md:mx-8 mx-24 flex relative justify-center  items-center "
                   >
                     <div className=" w-[550px] overflow-hidden group flex items-end border-[#00000070] h-[300px] border-2 relative rounded-3xl cursor-pointer p-4 bg-transparent backdrop-blur-lg">
@@ -38,15 +54,15 @@ const CardSlide = () => {
                      <Image className=" absolute left-0 blur-2xl  opacity-70 group-hover:opacity-100 top-0 object-cover w-full  h-full transition duration-1000" alt="" width={1000} height={1000} src={'/content/cardbg.jpeg'}/>
 
                      <div className=" absolute right-4 top-1/4 z-20">
-                       <h1 className="text-[87px] text-[#ffffff76]  font-paps font-bold">{item + 1}</h1>
+                       <h1 className="text-[87px] text-[#ffffff76]  font-paps font-bold">{item.key}</h1>
                      </div>
                                 
                    <div className=" text-[#ccc] z-20">
                    <h1 className="text-3xl font-paps font-bold">
-                      Hello stacking
+                      {item.title}
                     </h1>
                     <h3 className="font-paps font-extralight text-gray-500">
-                      hi stacking partners we are here to emborse you
+                      {item.description}
                     </h3>
                    </div>
                     </div>

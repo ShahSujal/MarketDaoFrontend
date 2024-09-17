@@ -89,9 +89,79 @@ const UserLiquidity = ({ liquidity, self }: Props) => {
                         alt=""
                         className=" w-28 h-28  object-cover rounded-lg"
                       />
+                       <div className=" flex flex-col justify-center items-center w-2/3">
+                       <div className=" w-full flex flex-row justify-between ">
+                            <h1 className=" text-lg font-paps font-bold text-gray-300">
+                              Native TBsc
+                            </h1>
+                            <h1 className=" text-xs font-paps font-extralight text-gray-300">
+                              last verified {new Date().toDateString()}
+                            </h1>
+                          </div>
+                          <div className=" w-full flex flex-row justify-between ">
+                            <h3 className=" text-gray-400 font-sm font-paps font-light">
+                             0.24 TBsc
+                            </h3>
+                            <button className="w-28 h-8 relative mt-7 rounded-3xl text-gray-200 bg-gradient-to-tr from-[#9959ff] to-[#ff7aa6]font-fragment font-medium ">
+                              verify
+                            </button>
+                          </div>
+                          </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            )}
+            {liquidity.length < 1 && (
+              <CarouselItem className="md:basis-1/2 lg:basis-1/3 h-40">
+                <div className="p-1">
+                  <Card className=" h-36 w-full ">
+                    <CardContent className="flex  items-center justify-center flex-row w-full h-full ">
+                      <Image
+                        src={"/content/gradientCoin.svg"}
+                        width={1000}
+                        height={1000}
+                        alt=""
+                        className=" w-28 h-28  object-cover rounded-lg"
+                      />
+                       <div className=" flex flex-col justify-center items-center w-2/3">
+                       <div className=" w-full flex flex-row justify-between ">
+                            <h1 className=" text-lg font-paps font-bold text-gray-300">
+                            0xf4..787 Gtk 
+                            </h1>
+                            <h1 className=" text-xs font-paps font-extralight text-gray-300">
+                              last verified {new Date().toDateString()}
+                            </h1>
+                          </div>
+                          <div className=" w-full flex flex-row justify-between ">
+                            <h3 className=" text-gray-400 font-sm font-paps font-light">
+                           24 token
+                            </h3>
+                            <button className="w-28 h-8 relative mt-7 rounded-3xl text-gray-200 bg-gradient-to-tr from-[#9959ff] to-[#ff7aa6]font-fragment font-medium ">
+                              verify
+                            </button>
+                          </div>
+                          </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </CarouselItem>
+            )}
+            {/* {liquidity.length < 1 && (
+              <CarouselItem className="md:basis-1/2 lg:basis-1/3 h-40">
+                <div className="p-1">
+                  <Card className=" h-36 w-full ">
+                    <CardContent className="flex  items-center justify-center flex-row w-full h-full ">
+                      <Image
+                        src={"/content/gradientCoin.svg"}
+                        width={1000}
+                        height={1000}
+                        alt=""
+                        className=" w-28 h-28  object-cover rounded-lg"
+                      />
                       <div className="flex flex-col justify-evenly items-center">
-                        <h1 className=" text-xl font-fragment font-bold">
-                          No liquidity registered yet...
+                        <h1 className=" text-lg font-fragment font-bold">
+                          0x245...f56 token
                         </h1>
                         <Button
                           className="w-28 h-8 relative mt-7 rounded-3xl text-gray-200 bg-gradient-to-tr from-[#3bb7f0] to-[#2670f9] font-fragment font-medium "
@@ -104,8 +174,8 @@ const UserLiquidity = ({ liquidity, self }: Props) => {
                   </Card>
                 </div>
               </CarouselItem>
-            )}
-            {self && (
+            )} */}
+            {/* {self && (
               <CarouselItem className="md:basis-1/2 lg:basis-1/3 h-40">
                 <div className="p-1">
                   <Card className=" h-36 w-full ">
@@ -129,7 +199,7 @@ const UserLiquidity = ({ liquidity, self }: Props) => {
                   </Card>
                 </div>
               </CarouselItem>
-            )}
+            )} */}
           </CarouselContent>
           <CarouselPrevious />
           <CarouselNext />

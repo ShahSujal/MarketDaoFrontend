@@ -8,19 +8,19 @@ type Props = {};
 
 const TopNavigation = (props: Props) => {
   return (
-    <div className=" w-full h-14 flex mt-[50px] bg-gradient-to-br from-[#64636328] to-[#fffdfd18] justify-between items-center px-4 rounded-3xl backdrop-blur-sm">
+    <div className=" w-full h-14 flex mt-[30px] bg-gradient-to-br from-[#64636328] to-[#fffdfd18] justify-between items-center px-4 rounded-3xl backdrop-blur-sm">
       <div
         className="flex items-center gap-2 font-paps flex-row font-medium text-xl text-[#aba8a8]  md:text-base"
       >
        
-        <HeartHandshake/> SpareMoney
+        <HeartHandshake/> Stakeyards
       </div>
 
       <div className=" flex justify-center space-x-4 items-center">
         <Link href={"/dapp"}>
-         <div className=" w-40 h-8 relative rounded-2xl">
+         <div className=" w-40 h-8 max-md:w-32 relative rounded-2xl">
           <Image src="/content/cardbg.jpeg" width={100} height={100} alt="" className=" w-full h-full rounded-2xl absolute top-0 object-cover transition"/>
-         <button className="flex items-center justify-center flex-row w-40 h-8 relative rounded-2xl text-gray-400 bg-transparent backdrop-blur-xl z-10 hover:text-white hover:backdrop-blur-sm transition duration-1000 font-fragment font-medium ">
+         <button className="flex items-center max-md:w-32 justify-center flex-row w-40 h-8 relative rounded-2xl text-gray-400 bg-transparent backdrop-blur-xl z-10 hover:text-white hover:backdrop-blur-sm transition duration-1000 font-fragment font-medium ">
           <AudioLines width={14} height={14}/> &nbsp;  Dashboard
           </button>
          </div>

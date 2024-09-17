@@ -20,10 +20,10 @@ type PopupCardProps = {
 };
 
 const cardData: CardData[] = [
-  { title: "Hello stacking", description: "hi stacking partners we are here to emborse you", direction: -300 },
-  { title: "Hello stacking", description: "hi stacking partners we are here to emborse you", direction: 300 },
-  { title: "Hello stacking", description: "hi stacking partners we are here to emborse you", direction: -300 },
-  { title: "Hello stacking", description: "hi stacking partners we are here to emborse you", direction: 300 },
+  { title: "Effortless Earnings", description: "Unlock passive income streams with innovative investment dApps.", direction: -300 },
+  { title: "Collaborate with Investors", description: "Team up with fellow investors to maximize your profits.", direction: 300 },
+  { title: "Pitch Your Ideas", description: "Present upcoming investments to investors and earn rewards.", direction: -300 },
+  { title: "Earn Through Campaigns", description: "Complete YouTube and Twitter tasks to earn cryptocurrency rewards.", direction: 300 },
 ];
 
 
@@ -38,20 +38,12 @@ const Popupcards: React.FC<Props> = (props) => {
     <div className='w-full h-[160vh] flex justify-evenly items-center flex-col z-10'>
       {cardData.map((card, index) => (
         <motion.div
-        variants={{
-          hidden: { opacity: 0.30, x: 0.5 },
-          visible: { opacity: 1, x: 0 },
-        }}
-        initial="hidden"
-        animate={control}
         key={index}
-        transition={{ delay: 1.5, duration: 1 }}
-        style={{ zIndex: 10 }}
-        className={`w-[350px] h-[150px] flex justify-center items-center flex-col  rounded-lg text-center p-3 backdrop-blur-md border-2 border-[#2c2c2c]`}
+        className={`w-[300px] h-[110px] max-md:mr-0 max-md:ml-0 flex justify-center items-center flex-col  rounded-lg text-center p-3 backdrop-blur-md border-2 border-[#2c2c2c] ${card.direction > 0 ? 'mr-96' : 'ml-96'}`}
         ref={ref}
       >
-        <h1 className='text-[#d3d1d1] font-paps font-medium'>hello</h1>
-        <h3 className='text-gray-500 font-paps font-extralight'> hello staking </h3>
+        <h1 className='text-[#a6dbf3] font-paps font-medium'>{card.title}</h1>
+        <h3 className='text-gray-500 font-paps font-extralight'> {card.description}</h3>
       </motion.div>
       ))}
     </div>

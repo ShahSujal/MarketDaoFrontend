@@ -20,7 +20,7 @@ const Treades = (props: Props) => {
           className='z-10 relative'
         >
           
-          <h1 className='text-[55px] text-center font-semibold text-white' style={{ textShadow: "5px 5px 15px #fff" }}>
+          <h1 className='text-[55px] max-sm:w-full max-sm:text-[40px] text-center font-semibold text-white' style={{ textShadow: "5px 5px 15px #fff" }}>
             Trades from more than 150 Countries<br/>
             countries around the world 
             have registered!
