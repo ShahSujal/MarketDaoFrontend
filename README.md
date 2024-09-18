@@ -1,4 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+![Logo](https://media.discordapp.net/attachments/1285946541202477159/1285985181462827143/Untitled_1.png?ex=66ec4287&is=66eaf107&hm=fca73267338f8eeec7924a8d9d1683d7f7353c531c68481962063336247daa31&=&format=webp&quality=lossless&width=1400&height=386)
+
+
+# **Stakeyards**
+
+Welcome to Stakeyards – a decentralized Web3 platform that allows investors to create their own dApps where pitchers (users) can pitch profitable investment ideas. Stakeyards fosters collaboration between multiple investors within a single dApp, allowing them to make informed investment decisions. With governance tokens, decentralized communication via Detalks, and crypto-based campaigns, Stakeyards provides a unique, interactive investment experience.
+
+
+## Features
+
+- Investor dApp
+Create Custom dApps: Investors can create their own decentralized apps (dApps) to attract pitchers who want to propose investment ideas.
+Collaborate with Multiple Investors: Investors can invite others to join their dApp, pooling resources for more significant investment opportunities.
+Pitching System
+Submit Investment Proposals: Pitchers can submit detailed proposals for investment opportunities (e.g., upcoming tokens, startups) and collaborate with investors.
+Collateral-Based Approval: Pitchers must provide a portion of collateral when making a pitch. If a pitch goes wrong after approval, 40% of the collateral is deducted and distributed to the investors.
+
+- Investment Sharing:
+ Investors can pool their funds together to support a pitch, splitting the capital required for investment.
+Campaigns
+Brand Promotion: Companies can create campaigns to promote their products through social media (YouTube, Twitter, etc.).
+Quest Requirements: To participate in a campaign, questers (participants) must meet specific requirements (e.g., minimum subscribers on social media).
+Crypto Rewards: Questers who complete campaign tasks successfully earn cryptocurrency rewards.
+Detalks
+Decentralized Chat System: Detalks allows pitchers and investors to communicate and collaborate in a secure, decentralized manner after a pitch is approved.
+Real-Time Discussions: Investors and pitchers can use Detalks to discuss investment details, negotiate terms, and make decisions in real time.
+
+- Governance Token & Collateral
+
+Governance Token: Decisions within dApps, such as pitch approvals, are made through governance tokens. The more tokens staked, the greater the decision-making power.
+Collateral for Investment: Investors must provide governance tokens as collateral when approving a pitch. Successful pitches reward pitchers with these governance tokens, allowing them to become investors once they reach a threshold.
+
+
+## Tech Stack
+
+**Web3:** Wagmi, Viem, Reown(Wallet Connect), XMTP
+
+**Web2:** Nextjs, TailwindCss, Shadcn, Supabase, Tanstack Query, Framer-motion, Spline, Prisma (ORM), Jotai
+
+**Heaadless CMS:**   Prismic.io
+
+
+## Worflow
+
+![App Screenshot](https://shahhsujal.vercel.app/_next/image?url=%2Fprojects%2Faspect2.jpg&w=3840&q=75)
+
 
 ## Getting Started
 
@@ -15,22 +61,3 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
