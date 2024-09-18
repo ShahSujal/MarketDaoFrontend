@@ -1,5 +1,5 @@
 
-![Logo](https://media.discordapp.net/attachments/1285946541202477159/1285986804310216839/Untitled_2.png?ex=66ec440a&is=66eaf28a&hm=9180b1b573c8f4e83e7d59bf98b8d8327229c69d41dd4f7f888626ff9de1698b&=&format=webp&quality=lossless&width=1207&height=386)
+![Logo](https://media.discordapp.net/attachments/1285946541202477159/1285987428515057859/Untitled_3.png?ex=66ec449f&is=66eaf31f&hm=57fc2868723a7b64225f84caa455dbb3d8e68f7a3e1f40dc7d29b3fbc9aa7d1e&=&format=webp&quality=lossless&width=1207&height=386)
 
 
 # **Stakeyards**
