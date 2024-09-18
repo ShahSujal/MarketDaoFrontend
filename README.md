@@ -46,18 +46,4 @@ Collateral for Investment: Investors must provide governance tokens as collatera
 ![App Screenshot](https://shahhsujal.vercel.app/_next/image?url=%2Fprojects%2Faspect2.jpg&w=3840&q=75)
 
 
-## Getting Started
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
