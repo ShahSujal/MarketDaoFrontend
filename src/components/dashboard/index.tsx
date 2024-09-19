@@ -23,6 +23,8 @@ import ProfileBanner from "../profile/bannner";
 import UserInvestments from "../profile/investment";
 import UserRewards from "../profile/winnedrewards";
 import Partners from "../profile/partners";
+import { Button } from "../ui/button";
+import { useWeb3Modal } from "@web3modal/wagmi/react";
 
 type Props = {
   userInfo: TInvestorDetails;
@@ -39,6 +41,22 @@ const Dashboard = ({ userInfo, self }: Props) => {
   const [user] = useAtom(userAtom);
   const [showTab, setshowTab] = useState<ETab>(ETab.Description);
   const { address } = useAccount();
+  const { open } = useWeb3Modal();
+  if (!address) {
+    return  <div className=" w-full min-h-screen flex justify-center items-center flex-col bg-black">
+    <h1 className=" text-xl font-paps font-bold">
+      To access detalks functionality you need to
+    </h1>
+    <Button
+      className=" mt-4"
+      onClick={() => {
+        open();
+      }}
+    >
+      Connect Wallet
+    </Button>
+  </div>
+  }
   return (
     <main className=" w-full min-h-screen  flex flex-row flex-wrap  justify-evenly ">
       <ProfileBanner
@@ -96,15 +114,7 @@ const Dashboard = ({ userInfo, self }: Props) => {
         </button>
       </div>
 
-      {showTab === ETab.Description ? (
-        <div className=" w-full min-h-screen flex flex-col">
-          <UserLiquidity liquidity={userInfo.liquiditys} self={true} />
-        </div>
-      ) : showTab === ETab.Pitches ? (
-        <div className=" w-full min-h-screen flex flex-col">
-          <UserLiquidity liquidity={userInfo.liquiditys} self={false} />
-        </div>
-      ) : showTab === ETab.Investments ? (
+      { showTab === ETab.Investments ? (
         <div className=" w-full min-h-screen flex flex-col">
           {userInfo.investments[0] && (
             <UserInvestments investment={userInfo.investments[0]} />
