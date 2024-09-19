@@ -16,12 +16,13 @@ import {
 } from "../ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import { createInvestment } from "@/actions/investor";
-import { EStatus, LoadDataType, TApiResponse } from "@/types/common";
+import { EChains, EStatus, LoadDataType, TApiResponse } from "@/types/common";
 import { useAccount } from "wagmi";
 import { createInvestmentFunction } from "@/contract/helpers/investorContract";
 import { creationType } from "@/types/enum";
 import { Switch } from "../ui/switch";
+import { createCampaignFunction } from "@/contract/helpers/campaignContract";
+import { ParticpationType } from "@prisma/client";
 
 interface Step1Props {
   setLoadData: React.Dispatch<React.SetStateAction<LoadDataType>>;
@@ -37,6 +38,18 @@ export function Step2({ setLoadData, loadData }: Step1Props) {
   const { address } = useAccount();
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [imageFile, setImageFile] = useState<File | undefined>(undefined);
+  const chains = [
+    {
+      id: 1,
+      name: "Sepolia",
+      type: EChains.sepolia
+    },
+    {
+      id: 2,
+      name: "Binance",
+      type: EChains.bsc
+    },
+  ]
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -52,29 +65,37 @@ export function Step2({ setLoadData, loadData }: Step1Props) {
         description: "Please connect your wallet to continue",
       });
     }
-    if (!imageFile) {
+    if (!loadData.imageFile) {
       return toast({
         title: "Image not found",
         description: "Please upload an image to continue",
       });
     }
-    console.log({
-      tokenName: loadData.tokenName,
-      tokenSymbol: loadData.tokenSymbol,
-      tokenAddress: "0x",
-      title: loadData.title,
-      description: loadData.description,
-      imageFile: imageFile,
-    });
 
-    const response: TApiResponse = await createInvestmentFunction({
+    const response: TApiResponse = await createCampaignFunction({
       tokenName: loadData.tokenName,
       tokenSymbol: loadData.tokenSymbol,
-      tokenAddress: "0x",
+      tokenAddress: loadData.tokenAddress,
       title: loadData.title,
       description: loadData.description,
-      imageFile: imageFile,
+      imageFile: loadData.imageFile,
+      chain: loadData.chain,
+      campaignType: loadData.campaignType,
+      minimumEligiablity: loadData.minimumEligiablity,
+      numberOfWinners: loadData.numberOfWinners,
+      priceValue: loadData.priceValue,
+      isNative: loadData.isNative,
+      rewardType: loadData.RewardsType,
+      particpationType: ParticpationType.EVERYONE,
     });
+    // const response: TApiResponse = await createInvestmentFunction({
+    //   tokenName: loadData.tokenName,
+    //   tokenSymbol: loadData.tokenSymbol,
+    //   tokenAddress: "0x",
+    //   title: loadData.title,
+    //   description: loadData.description,
+    //   imageFile: imageFile,
+    // });
     if (response.status === EStatus.SUCCESS) {
       console.log("success");
       return toast({
@@ -89,6 +110,8 @@ export function Step2({ setLoadData, loadData }: Step1Props) {
         description: "Investment creation failed",
       });
     }
+    console.log("success");
+    
   };
   return (
     <div className="w-full lg:grid min-h-[95vh] lg:grid-cols-2">
@@ -172,7 +195,7 @@ export function Step2({ setLoadData, loadData }: Step1Props) {
                   placeholder="Winners"
                   required
                   onChange={(e) => {
-                    setLoadData({ ...loadData, tokenName: e.target.value });
+                    setLoadData({ ...loadData, numberOfWinners:Number(e.target.value) });
                   }}
                 />
               </div>
@@ -184,7 +207,7 @@ export function Step2({ setLoadData, loadData }: Step1Props) {
                   placeholder="Value should be in Eth"
                   required
                   onChange={(e) => {
-                    setLoadData({ ...loadData, tokenSymbol: e.target.value });
+                    setLoadData({ ...loadData, priceValue:Number(e.target.value) });
                   }}
                 />
               </div>
@@ -197,19 +220,36 @@ export function Step2({ setLoadData, loadData }: Step1Props) {
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Chain</SelectLabel>
-                      <SelectItem value="sepolia">Sepolia</SelectItem>
-                      <SelectItem value="banana">Binance</SelectItem>
+                      {
+                        chains.map((chain) => (
+                          <SelectItem key={chain.id} value={chain.name}
+                          onChange={(e) => {
+                            setLoadData({...loadData, chain: chain.type})
+                          }}
+                          >
+                            {chain.name}
+                          </SelectItem>
+                        ))
+                      }
                     </SelectGroup>
                   </SelectContent>
                 </Select>
               </div>
-              <div className=" flex flex-row space-x-4 my-3 w-full ">
+                        <div className="flex flex-row space-x-4 my-3 w-full">
                 <Label htmlFor="isNative">isNative investment</Label>
-                <Switch id="isNative" />
+                <Switch
+                  id="isNative"
+                  onChange={(e) => {
+                    const target = e.target as HTMLInputElement;
+                    setLoadData({ ...loadData, isNative: target.checked });
+                  }}
+                />
               </div>
               <div className="grid w-full max-w-sm items-center gap-1.5 my-3">
                 <Label htmlFor="tokenAddress">Token Address</Label>
-                <Input id="tokenAddress" placeholder="0x.." type="text" />
+                <Input id="tokenAddress" placeholder="0x.." type="text" onChange={(e)=>{
+                  setLoadData({...loadData, tokenAddress: e.target.value})
+                }} />
               </div>
 
               <div className="grid grid-cols-2 gap-4"></div>

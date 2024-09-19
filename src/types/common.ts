@@ -72,7 +72,7 @@ export type TInvestorStake = (User & {
 export type TCreateCampaignProps = {
   title: string;
   description: string;
-  image: File;
+  image: string;
   totalWinners: number;
   totalPrize: number;
   campaignStartDate: Date;
@@ -86,8 +86,17 @@ export type TCreateCampaignProps = {
   taskType: TaskType;
   particpationType: ParticpationType;
   walletAddress: string; 
-  imageFile?: string;
+  imageFile?: File;
 };
+// export enum TCampaignTypes {
+//   YoutubeShorts="YoutubeShorts",
+//   YoutubeVideo="YoutubeVideo",
+//   TwitterPost="TwitterPost",
+// }
+export enum EChains {
+  sepolia="Sepolia",
+  bsc="BSC",
+}
 export interface LoadDataType {
   creationType: creationType;
   step: number;
@@ -96,7 +105,16 @@ export interface LoadDataType {
   image: string;
   tokenName: string;
   tokenSymbol: string;
-  chainId: number[];
+  campaignType: TaskType;
+  minimumEligiablity: number;
+  numberOfWinners: number;
+  priceValue: number;
+  isNative: boolean;
+  chain: EChains;
+  tokenAddress: string;
+  RewardsType: RewardsType;
+  imageFile: File | undefined;
+  
 }
 export type TUpdateUserDetails = {
   walletAddress: `0x${string}`;

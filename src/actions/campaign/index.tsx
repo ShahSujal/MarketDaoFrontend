@@ -1,7 +1,8 @@
+"use server";
 import { base64ToBlob } from "@/lib/actions";
 import { client } from "@/lib/config/prismaconfig";
 import { EStatus, TCreateCampaignProps } from "@/types/common";
-// import { Campaign } from "@prisma/client";
+import { Campaign } from "@prisma/client";
 import { createClient } from "@supabase/supabase-js";
 import { v4 as uuidv4 } from "uuid";
 // Create a single supabase client for interacting with your database
@@ -16,7 +17,7 @@ export const createCampaign = async (data: TCreateCampaignProps) => {
     const imageId = uuidv4();
     console.log({ imageId });
   
-    const imageBlob = base64ToBlob(data.imageFile!);
+    const imageBlob = base64ToBlob(data.image!);
   
     const { data: uploadData, error: uploadError } = await supabase.storage
       .from(process.env.BUCKET_NAME!)
@@ -36,7 +37,7 @@ export const createCampaign = async (data: TCreateCampaignProps) => {
     data: {
       title: data.title,
       description: data.description,
-      image: uploadData?.fullPath,
+      image: imageId,
       totalWinners: data.totalWinners,
       totalPrize: data.totalPrize,
       campaignStartDate: data.campaignStartDate,
@@ -68,17 +69,35 @@ export const createCampaign = async (data: TCreateCampaignProps) => {
   }
 };
 
-// export const getCampaigns = async ():Promise<Campaign[]> => {
-//   try {
-//     const response = await client.campaign.findMany();
-//     if (response) {
-//         return response;
-//     } else {
-//         return [];
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     return [];
+export const getCampaigns = async ():Promise<Campaign[]> => {
+  try {
+    const response = await client.campaign.findMany();
+    if (response) {
+        return response;
+    } else {
+        return [];
+    }
+  } catch (error) {
+    console.log(error);
+    return [];
     
-//   }
-// }
+  }
+}
+export const getCampaignById = async (id:string):Promise<Campaign | null> => {
+  try {
+    const response = await client.campaign.findFirst({
+        where: {
+            id: id
+        }
+    });
+    if (response) {
+        return response;
+    } else {
+        return null;
+    }
+  } catch (error) {
+    console.log(error);
+    return null;
+    
+  }
+}

@@ -5,17 +5,10 @@ import { Step2 } from "./step2";
 import { Step } from "./step";
 import { creationType } from "@/types/enum";
 import { z } from "zod"
-import { LoadDataType } from "@/types/common";
+import { EChains, LoadDataType } from "@/types/common";
+import { RewardsType, TaskType } from "@prisma/client";
 
 type Props = {};
-
-
-
-
-
-
-
-
 
 const CreatePage = (props: Props) => {
   const [loadData, setLoadData] = useState<LoadDataType>({
@@ -26,7 +19,15 @@ const CreatePage = (props: Props) => {
     image: "",
     tokenName: "",
     tokenSymbol: "",
-    chainId: [],
+    campaignType: TaskType.YOUTUBESHORT,
+    minimumEligiablity: 0,
+    numberOfWinners: 0,
+    priceValue: 0,
+    isNative: false,
+    chain: EChains.bsc,
+    tokenAddress: "",
+    imageFile: undefined,
+    RewardsType: RewardsType.NOTSTARTED,
   });
 
   return (

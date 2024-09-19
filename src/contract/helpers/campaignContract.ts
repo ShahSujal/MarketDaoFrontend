@@ -4,7 +4,8 @@ import { investorcontractabi } from "@/contract/abi/InvestorContractAbi";
 import { fileToBase64 } from "@/lib/actions";
 import { client } from "@/lib/config/prismaconfig";
 import { config } from "@/lib/config/wagmiConfig";
-import { EStatus, TApiResponse, TCreateCampaignProps } from "@/types/common";
+import { EChains, EStatus, TApiResponse, TCreateCampaignProps } from "@/types/common";
+import { ParticpationType, RewardsType, TaskType } from "@prisma/client";
 import {
   getAccount,
   simulateContract,
@@ -13,17 +14,25 @@ import {
 } from "@wagmi/core";
 import { Address } from "viem";
 
-type TInvestmentProps = {
+type TCampaignProps = {
   title: string;
   description: string;
   imageFile: File;
   tokenAddress: string;
   tokenSymbol: string;
   tokenName: string;
+  chain: EChains;
+  campaignType: TaskType;
+  minimumEligiablity: number;
+  numberOfWinners: number;
+  priceValue: number;
+  isNative: boolean;
+  rewardType: RewardsType;
+  particpationType: ParticpationType;
 };
 
-export const createInvestmentFunction = async (
-  data: TCreateCampaignProps
+export const createCampaignFunction = async (
+  data: TCampaignProps
 ): Promise<TApiResponse> => {
 try {
   const walletAddress = "0xC199B073f2c43bC347dE431fAD9B01208F6aC7E5";
@@ -56,27 +65,26 @@ try {
   // if (receipt.status === "success") {
    
 
-const base64Image = await fileToBase64(data.image);
+const base64Image = await fileToBase64(data.imageFile);
 // console.log({ base64Image });
-
+const currentDate = new Date();
 const response = await createCampaign({
   title: data.title,
   description: data.description,
-  imageFile: base64Image,
-  totalWinners: data.totalWinners,
-  totalPrize: data.totalPrize,
-  campaignStartDate: data.campaignStartDate,
-  campaginEndDate: data.campaginEndDate,
+  totalWinners: data.numberOfWinners,
+  totalPrize: data.priceValue,
+  campaignStartDate: new Date(),
+ campaginEndDate: new Date(currentDate.setDate(currentDate.getDate() + 5)),
   rewardType: data.rewardType,
   isNative: data.isNative,
-  chainId: data.chainId,
+  chainId: 97,
   tokenAddress: data.tokenAddress,
   tokenSymbol: data.tokenSymbol,
   tokenName: data.tokenName,
-  taskType: data.taskType,
+  taskType: data.campaignType,
   particpationType: data.particpationType,
   walletAddress: walletAddress,
-  image: data.image,
+  image: base64Image,
 });
   if (!response) {
     return {
