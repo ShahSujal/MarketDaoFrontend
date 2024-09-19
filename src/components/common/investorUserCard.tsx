@@ -16,17 +16,17 @@ type Props = {
 const InvestorUserCard = ({ investor }: Props) => {
   return (
     <div className="w-[300px] bg-black flex justify-between items-center flex-col h-[320px] m-3">
-      <div className=" w-10/12 h-48 ">
+      <div className=" w-10/12 h-48 justify-center items-center flex bg-[#141313] ">
         <Image
           src={
             investor.image
               ? process.env.NEXT_PUBLIC_IMAGE_URL! + investor.image
-              : "/content/illustration.png"
+              : `https://avatar.iran.liara.run/public/boy?username=${investor.walletAddress}`
           }
           alt=""
           width={1080}
           height={1080}
-          className=" w-full h-48 object-cover rounded-xl"
+          className=" w-full h-48 object-cover rounded-full"
         />
       </div>
       <h1 className=" text-lg font-paps">

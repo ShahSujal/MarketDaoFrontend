@@ -22,8 +22,7 @@ type Props = {
   opensea: string | null;
   self: boolean;
 };
-const defaultImage =
-  "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
 
 const ProfileBanner = ({
   bannerImage,
@@ -49,7 +48,7 @@ const ProfileBanner = ({
         src={
           profileImage
             ? process.env.NEXT_PUBLIC_IMAGE_URL! + profileImage
-            : defaultImage
+            : "https://avatar.iran.liara.run/public"
         }
         width={1000}
         height={1000}

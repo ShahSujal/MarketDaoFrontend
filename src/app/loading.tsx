@@ -1,10 +1,10 @@
 import React from 'react'
+import { CircleLoader } from 'react-spinners'
 
-type Props = {}
-
-const loading = (props: Props) => {
+const loading = () => {
   return (
-    <div>
+    <div className=' w-full h-screen justify-center items-center flex flex-col'>
+      <CircleLoader />
         loading...
     </div>
   )
