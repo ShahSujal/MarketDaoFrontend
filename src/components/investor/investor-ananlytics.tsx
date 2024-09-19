@@ -15,9 +15,10 @@ const InvestorAnanlytics = ({ investment, analytics }: Props) => {
     <div className=" p-3 w-full ">
       <h1 className=" text-3xl text-[#c0bebe] my-5 ">Other investors</h1>
 
-      <div className=" w-full px-10 ">
+    { investment.accounts.length > 0 &&  <div className=" w-full px-10 ">
         <InvestorCarousel investment={investment}/>
       </div>
+}
      
 {
    analytics.last10Investments.length > 0  && <PitchTable analytics={analytics} />
