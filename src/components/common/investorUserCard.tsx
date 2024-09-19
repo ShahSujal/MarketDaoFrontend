@@ -19,14 +19,12 @@ const InvestorUserCard = ({ investor }: Props) => {
       <div className=" w-10/12 h-48 justify-center items-center flex bg-[#141313] ">
         <Image
           src={
-            investor.image
-              ? process.env.NEXT_PUBLIC_IMAGE_URL! + investor.image
-              : `https://avatar.iran.liara.run/public/boy?username=${investor.walletAddress}`
+              `https://avatar.iran.liara.run/public/boy?username=${investor.walletAddress}`
           }
           alt=""
           width={1080}
           height={1080}
-          className=" w-full h-48 object-cover rounded-full"
+          className=" w-full h-48 object-contain rounded-full"
         />
       </div>
       <h1 className=" text-lg font-paps">

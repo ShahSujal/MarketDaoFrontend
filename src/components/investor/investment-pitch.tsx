@@ -51,28 +51,7 @@ const handleSubmit = async()=>{
               </DialogDescription>
             </DialogHeader>
 
-            {/*
- id                     String   @default(uuid()) @id
-  userId                 String
-  user                   User     @relation(fields: [userId], references: [walletAddress])
-  investmentId           String
-  investment             Investment @relation(fields: [investmentId], references: [id])
-  title                  String
-  description            String
-  deadline               DateTime
-  initialInvestment      Int
-  profitAmountEstimation Int
-  isNative               Boolean
-  investmentTokenAddress String
-  profitPercentageAmount Int
-  isExecuted             Boolean
-  voteFor                Int
-  voteAgainst            Int
-  totalVoters            Int
-  Status                 Status @default(ACTIVE)
-  createdAt              DateTime @default(now())
-  updatedAt              DateTime @updatedAt
-*/}
+      
 
            { formStage === EStage.Details ?
             <div className="flex items-center flex-col space-x-2">

@@ -5,6 +5,8 @@ import Image from "next/image";
 import InvestorDescription from "./investordescription";
 import { getPitchesByInvestorAndMonth } from "@/actions/investor";
 import { TInvestorIdProps } from "@/types/common";
+import { walletAddressShortn } from "@/lib/actions";
+import { Address } from "viem";
 
 type InvestmentProps = {
   investment: TInvestorIdProps;
@@ -28,9 +30,7 @@ const Investor = async({ investment }: InvestmentProps) => {
         <div className=" flex justify-center   bg-zinc-900 items-start flex-col w-[450px] min-h-screen">
           <div className=" flex justify-center flex-col items-center w-[450px] h-full  rounded-2xl">
             <Image
-              src={
-               investment.user.image ?? "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              }
+            src={`https://avatar.iran.liara.run/public/boy?username=${investment.user.walletAddress}`}
               alt=""
               width={400}
               height={450}
@@ -43,7 +43,7 @@ const Investor = async({ investment }: InvestmentProps) => {
                   {investment.user.name}
                 </h1>
                 <h1 className=" text-lg font-paps font-extralight text-gray-500">
-                  65% equity
+                  {walletAddressShortn(investment.user.walletAddress! as Address)}
                 </h1>
               </div>
               <h3 className=" text-gray-500 font-paps font-light px-3">

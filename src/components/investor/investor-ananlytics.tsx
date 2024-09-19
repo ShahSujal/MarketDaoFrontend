@@ -16,7 +16,7 @@ const InvestorAnanlytics = ({ investment, analytics }: Props) => {
       <h1 className=" text-3xl text-[#c0bebe] my-5 ">Other investors</h1>
 
       <div className=" w-full px-10 ">
-        <InvestorCarousel />
+        <InvestorCarousel investment={investment}/>
       </div>
      
 {

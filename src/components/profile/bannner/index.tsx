@@ -45,11 +45,7 @@ const ProfileBanner = ({
         className=" w-full h-[450px]  grayscale absolute top-0 transition group-hover:grayscale-0 object-cover opacity-50 rounded-3xl"
       />
       <Image
-        src={
-          profileImage
-            ? process.env.NEXT_PUBLIC_IMAGE_URL! + profileImage
-            : "https://avatar.iran.liara.run/public"
-        }
+        src={`https://avatar.iran.liara.run/public/boy?username=${walletAddress}`}
         width={1000}
         height={1000}
         alt=""
