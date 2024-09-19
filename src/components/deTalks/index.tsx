@@ -4,7 +4,6 @@ import { useAccount, useWalletClient } from "wagmi";
 import { Client, useClient, useConversations } from "@xmtp/react-sdk";
 import type { CachedConversation, Signer } from "@xmtp/react-sdk";
 import { loadKeys, storeKeys } from "@/lib/xmtpKeys";
-import { Address } from "viem";
 import UserConversations from "./conversations";
 import UserMessages from "./conversations/messages";
 import { TPeerType } from "@/types/common";
@@ -17,7 +16,7 @@ const Detalks = () => {
     peerAddress: undefined,
     conversation: undefined,
   });
-  const { chainId, address } = useAccount();
+  const { address } = useAccount();
   const handleConnect = useCallback(async () => {
     if (!address || !walletClient) {
       return;
