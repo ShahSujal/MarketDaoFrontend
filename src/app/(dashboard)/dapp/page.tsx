@@ -1,4 +1,5 @@
 import { getInvestments } from '@/actions/investor'
+import InformationCard from '@/components/common/informationCard'
 import InvestorCard from '@/components/common/investorcard'
 import { Investment } from '@prisma/client'
 import React from 'react'
@@ -13,6 +14,7 @@ const page = async() => {
             return <InvestorCard key={item.id} investment={item}/>
         })
     }
+          <InformationCard/>
     </main>
   )
 }

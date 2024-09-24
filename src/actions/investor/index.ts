@@ -28,7 +28,6 @@ const supabase = createClient(
   process.env.SUPABASE_ANON_KEY!
 );
 
-
 export const createInvestment = async (
   data: TInvestmentProps
 ): Promise<TApiResponse> => {
@@ -99,8 +98,8 @@ export const getInvestmentById = async (
     include: {
       pitches: true,
       user: true,
-      partners: true, 
-    }
+      partners: true,
+    },
   });
 
   if (response) {

@@ -1,4 +1,4 @@
-import { Command, Crown, Hash, MessagesSquare, Zap } from "lucide-react";
+import { Command, Crown, Hash, MessagesSquare, Newspaper, Zap } from "lucide-react";
 
 export const marketPlace = [
   {
@@ -40,6 +40,13 @@ export const onDemand = [
     title: "Dashboard",
     shortTitle: "DashBoard",
     icon: <Hash />,
+    comingSoon: false,
+  },
+  {
+    redirectUrl: "/blogs",
+    title: "Blogs",
+    shortTitle: "Blogs",
+    icon: <Newspaper />,
     comingSoon: false,
   },
 ];

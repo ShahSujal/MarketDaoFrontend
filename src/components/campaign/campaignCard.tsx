@@ -11,7 +11,6 @@ type Props = {
 };
 
 const CampaignCard = ({ campaign }: Props) => {
-  
   return (
     <div className=" w-[320px] h-[380px] my-4 rounded-xl mx-3 relative bg-gradient-to-br from-[#4342425b] to-[#050505bd]  items-center flex flex-col border-2 border-[#171717] backdrop-blur-lg z-10 ">
       <Image
