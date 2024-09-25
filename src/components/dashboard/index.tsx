@@ -114,17 +114,43 @@ const Dashboard = ({ userInfo, self }: Props) => {
         </button>
       </div>
 
-      { showTab === ETab.Investments ? (
+      { showTab === ETab.Description ? (
+        <>
+        <UserLiquidity liquidity={userInfo.liquiditys} self={self}/>
+        </>
+      ): showTab === ETab.Investments ? (
         <div className=" w-full min-h-screen flex flex-col">
-          {userInfo.investments[0] && (
+          {userInfo.investments[0] ? (
             <UserInvestments investment={userInfo.investments[0]} />
+          ):(
+            <div className=" w-full h-[400px] flex justify-center items-center flex-col">
+             <Image src={"/content/empty.png"} width={400} height={400} alt="" className=" w-[400px] h-[300px]  object-contain rounded-2xl" />
+              <h1> No Investment created yet</h1>
+            </div>
+          )}
+          {/* <Partners investments={userInfo.}  /> */}
+        </div>
+      ): showTab === ETab.Pitches ? (
+        <div className=" w-full min-h-screen flex flex-col">
+          {userInfo.investments[0] ? (
+            <UserInvestments investment={userInfo.investments[0]} />
+          ):(
+            <div className=" w-full h-[400px] flex justify-center items-center flex-col">
+             <Image src={"/content/empty.png"} width={400} height={400} alt="" className=" w-[400px] h-[300px]  object-contain rounded-2xl" />
+              <h1> Not pitched any investment</h1>
+            </div>
           )}
           {/* <Partners investments={userInfo.}  /> */}
         </div>
       ) : (
         <div className=" w-full min-h-screen flex flex-col">
-          {userInfo.campaigns.length > 1 && (
+          {userInfo.campaigns.length > 1 ? (
             <UserRewards winned={userInfo.campaigns} />
+          ):(
+            <div className=" w-full h-[400px] flex justify-center items-center flex-col">
+             <Image src={"/content/empty.png"} width={400} height={400} alt="" className=" w-[400px] h-[300px]  object-contain rounded-2xl" />
+              <h1> Not winned any campaign to show analytics.</h1>
+            </div>
           )}
         </div>
       )}

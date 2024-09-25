@@ -2,11 +2,13 @@ import Image from "next/image";
 import React from "react";
 import { createClient } from "@/prismicio";
 import Link from "next/link";
-type Props = {};
+type Props = {
+  uuid: string;
+};
 
-const InformationCard = async() => {
+const InformationCard = async({uuid}:Props) => {
     const client = createClient();
-  const page = await client.getByUID("blogs", "exploring-dapp");
+  const page = await client.getByUID("blogs", uuid);
   if (!page.data) {
     return (
         <div>

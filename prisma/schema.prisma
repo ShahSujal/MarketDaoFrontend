@@ -117,8 +117,9 @@ model CurrentLiquidity {
   user                   User     @relation(fields: [userId], references: [walletAddress])
   chainId                Int
   tokenAddress           String?
+  tokenSymbol            String?
   isNative               Boolean
-  amount                 Int
+  amount                 Float
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
 }

@@ -1,11 +1,27 @@
+"use client"
 import { getUserAllDetails } from "@/actions/user";
+import InformationCard from "@/components/common/informationCard";
 import Dashboard from "@/components/dashboard";
-import React from "react";
+import { blogs } from "@/constants";
+import useUserInfo from "@/hooks/useUserInfo";
+import { config } from "@/lib/config/wagmiConfig";
+import { BlogType } from "@/types/enum";
+import { getAccount } from "@wagmi/core";
+import React, { useEffect } from "react";
+import { useAccount } from "wagmi";
 const Page = async() => {
- const userInfo = await getUserAllDetails("0x1059Ed65AD58ffc83642C9Be3f24C250905a28FB");
+ const blog = blogs.find((item) => item.type === BlogType.Dashboard)
+ const {address} = useAccount()
+ if(!address) return null
+ const {userInfo} = useUserInfo(address)
   return (
     <main className=" w-full min-h-screen ">
-    <Dashboard userInfo={userInfo} self={true}/>
+    {
+     userInfo && <Dashboard userInfo={userInfo} self={true}/>
+    }
+    {/* {
+      blog?.type && <InformationCard uuid={blog.uuid}/>
+    } */}
     </main>
   );
 };

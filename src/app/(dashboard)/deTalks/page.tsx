@@ -1,6 +1,9 @@
 "use client";
+import InformationCard from "@/components/common/informationCard";
 import Detalks from "@/components/deTalks";
 import { Button } from "@/components/ui/button";
+import { blogs } from "@/constants";
+import { BlogType } from "@/types/enum";
 import { useWeb3Modal } from "@web3modal/wagmi/react";
 import React from "react";
 import { useAccount } from "wagmi";
@@ -8,6 +11,7 @@ import { useAccount } from "wagmi";
 const Page = () => {
   const { address } = useAccount();
   const { open } = useWeb3Modal();
+  const blog = blogs.find((item) => item.type === BlogType.Detalks)
   return (
     <div>
       {address ? (
@@ -27,6 +31,9 @@ const Page = () => {
           </Button>
         </div>
       )}
+      {
+        blog?.type && <InformationCard uuid={blog.uuid}/>
+      }
     </div>
   );
 };

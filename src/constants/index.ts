@@ -1,3 +1,5 @@
+import { BlogType } from "@/types/enum";
+
 export const chainsWithLogo = [
     {
       chainId: 97,
@@ -45,4 +47,26 @@ export const chainsWithLogo = [
       localImage: "/chain/bitcoin.png",
     },
   ];
-  
+
+  export const blogs = [
+    {
+      type: BlogType.Pitcher,
+      uuid: "who-is-pitcher",
+    },
+    {
+      type: BlogType.Detalks,
+      uuid: "key-features-of-detalks",
+    },
+    {
+      type: BlogType.Campaigns,
+      uuid: "how-campaign-works",
+    },
+    {
+      type: BlogType.Dapp,
+      uuid: "exploring-dapp",
+    },
+    {
+      type: BlogType.Dashboard,
+      uuid: "example-flow",
+    },
+  ]

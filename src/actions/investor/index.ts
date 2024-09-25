@@ -2,6 +2,7 @@
 import { client } from "@/lib/config/prismaconfig";
 import {
   EStatus,
+  TAddLiquidity,
   TApiResponse,
   TInvestmentMonthlyData,
   TInvestorIdProps,
@@ -189,4 +190,55 @@ export const getInvestors = async (): Promise<TInvestorStake> => {
   } else {
     return [] as TInvestorStake;
   }
+};
+
+
+export const registerLiquidity = async ({isNative,userId,amount,chainId,tokenAddress,tokenSymbol}:TAddLiquidity) => {
+  const response = await client.currentLiquidity.create({
+    data:{
+      userId,
+      amount,
+      isNative,
+      chainId,
+      tokenAddress,
+      tokenSymbol
+    }
+  })
+  if (response.id) {
+    return {
+      status: EStatus.SUCCESS,
+      title: "Liquidity registered",
+      desciption: "Liquidity registered successfully",
+    };
+  }
+  return {
+    status: EStatus.ERROR,
+    title: "Liquidity registration failed",
+    desciption: "Liquidity registration failed",
+  };
+}
+
+export const updateLiquidity = async ({ id, amount }: { id: string; amount: number }) => {
+  try {
+    const response = await client.currentLiquidity.update({
+      where: { id },
+      data: { amount },
+    });
+
+    if (response.id) {
+      return {
+        status: EStatus.SUCCESS,
+        title: "Liquidity updated",
+        description: "Liquidity updated successfully",
+      };
+    }
+  } catch (error) {
+    console.error("Error updating liquidity:", error);
+  }
+
+  return {
+    status: EStatus.ERROR,
+    title: "Liquidity update failed",
+    description: "Liquidity update failed",
+  };
 };

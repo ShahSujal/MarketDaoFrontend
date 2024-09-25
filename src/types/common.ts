@@ -12,6 +12,15 @@ export enum EStatus {
   LOADERROR = "loaderror",
   NOTFOUND = "notfound",
 }
+
+export type TAddLiquidity = {
+  userId: string;
+  tokenAddress?: string;
+  tokenSymbol?: string;
+  amount: number;
+  isNative: boolean;
+  chainId: number;
+}
 export type TApiResponse = {
   status: EStatus;
   title: string;

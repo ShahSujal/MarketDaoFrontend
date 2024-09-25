@@ -4,6 +4,7 @@ import ProfileBanner from "./bannner";
 import UserLiquidity from "./liquidity";
 import UserInvestments from "./investment";
 import UserRewards from "./winnedrewards";
+import Image from "next/image";
 
 type Props = {
   userInfo: TInvestorDetails;

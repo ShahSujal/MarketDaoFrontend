@@ -80,12 +80,9 @@ const InvestmentPitch = (props: Props) => {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectLabel>Fruits</SelectLabel>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                        <SelectItem value="blueberry">Blueberry</SelectItem>
-                        <SelectItem value="grapes">Grapes</SelectItem>
-                        <SelectItem value="pineapple">Pineapple</SelectItem>
+                        <SelectLabel>ChainId</SelectLabel>
+                        <SelectItem value="apple">sepolia</SelectItem>
+                        <SelectItem value="banana">Binance</SelectItem>
                       </SelectGroup>
                     </SelectContent>
                   </Select>
