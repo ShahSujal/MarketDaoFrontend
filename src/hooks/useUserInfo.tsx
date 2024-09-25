@@ -3,17 +3,17 @@ import { getUserAllDetails } from '@/actions/user';
 import { useAccount } from 'wagmi';
 import { TInvestorDetails } from '@/types/common';
 
-const useUserInfo = (userAddress: string) => {
+const useUserInfo = () => {
   const [userInfo, setUserInfo] = useState<TInvestorDetails>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+  const { address } = useAccount();
   useEffect(() => {
     const fetchUserInfo = async () => {
       setLoading(true);
       setError(null);
       try {
-        const data = await getUserAllDetails(userAddress);
+        const data = await getUserAllDetails(address as string);
         setUserInfo(data);
       } catch (err) {
         setError('Failed to fetch user information');
@@ -22,10 +22,10 @@ const useUserInfo = (userAddress: string) => {
       }
     };
 
-    if (userAddress) {
+    if (address) {
       fetchUserInfo();
     }
-  }, [userAddress]);
+  }, [address]);
 
   return { userInfo, loading, error };
 };
