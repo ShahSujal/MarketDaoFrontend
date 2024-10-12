@@ -113,3 +113,8 @@ export const getUserAllDetails = async (walletAddress: string): Promise<TInvesto
   }
   return {} as TInvestorDetails;
 };
+
+export const getAllUsers = async (): Promise<User[]> => {
+  const users = await client.user.findMany();
+  return users;
+}

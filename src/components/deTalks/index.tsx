@@ -50,6 +50,7 @@ const Detalks = () => {
       handleConnect();
     }
   }, [client, walletClient, address, handleConnect]);
+  
   //   const checkUserCanMessage = async () => {
   //     // Start a conversation with XMTP
   //     if (!address) {

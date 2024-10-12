@@ -13,7 +13,6 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col relative ">
       <div className=" fixed top-0 left-0 w-full h-16 px-60 max-lg:px-8 max-md:px-0 flex flex-row justify-between items-center z-40 ">
-        {/* <Navbar/> */}
         <TopNavigation />
       </div>
       <LandingPage />
